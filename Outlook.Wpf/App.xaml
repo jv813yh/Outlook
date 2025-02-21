@@ -1,0 +1,9 @@
+﻿<prism:PrismApplication x:Class="Outlook.Wpf.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Outlook.Wpf"
+             xmlns:prism="http://prismlibrary.com/">
+    <prism:PrismApplication.Resources>
+         
+    </prism:PrismApplication.Resources>
+</prism:PrismApplication>

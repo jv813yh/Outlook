@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Infragistics.WPF.OutlookBar.Trial" Version="24.2.53" />
+    <PackageReference Include="Infragistics.WPF.Ribbon.Trial" Version="24.2.53" />
+    <PackageReference Include="Prism.Core" Version="8.0.0.1909" />
+    <PackageReference Include="Prism.Unity" Version="8.0.0.1909" />
+    <PackageReference Include="Prism.Wpf" Version="8.0.0.1909" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Modules\Outlook.Modules.Contacts\Outlook.Modules.Contacts.csproj" />
+    <ProjectReference Include="..\Modules\Outlook.Modules.Mail\Outlook.Modules.Mail.csproj" />
+    <ProjectReference Include="..\Outlook.Core\Outlook.Core.csproj" />
+    <ProjectReference Include="..\Outlook.Modules.Calendar\Outlook.Modules.Calendar.csproj" />
+  </ItemGroup>
+
+</Project>
