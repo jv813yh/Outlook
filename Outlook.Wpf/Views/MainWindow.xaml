@@ -16,15 +16,17 @@
 
     <igWpf:RibbonWindowContentHost>
         <igWpf:RibbonWindowContentHost.Ribbon>
-            <ig:XamRibbon>
+            <ig:XamRibbon prism:RegionManager.RegionName="{x:Static core:RegionNames.RibbonRegion}">
 
             </ig:XamRibbon>
         </igWpf:RibbonWindowContentHost.Ribbon>
 
         <DockPanel LastChildFill="True">
 
-            <igWpf:XamOutlookBar DockPanel.Dock="Left"
-                                 Width="200">
+            <igWpf:XamOutlookBar 
+                prism:RegionManager.RegionName="{x:Static core:RegionNames.XamOutlookBarRegion}"
+                DockPanel.Dock="Left"
+                Width="200">
 
             </igWpf:XamOutlookBar>
 

@@ -8,14 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Prism.Core" Version="8.0.0.1909" />
-    <PackageReference Include="Prism.Unity" Version="8.0.0.1909" />
-    <PackageReference Include="Prism.Wpf" Version="8.0.0.1909" />
+    <Folder Include="ViewModels\" />
+    <Folder Include="Views\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\" />
-    <Folder Include="Views\" />
+    <PackageReference Include="Prism.Core" Version="8.0.0.1909" />
+    <PackageReference Include="Prism.Unity" Version="8.0.0.1909" />
+    <PackageReference Include="Prism.Wpf" Version="8.0.0.1909" />
   </ItemGroup>
 
 </Project>

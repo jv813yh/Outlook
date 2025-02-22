@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35806.99 d17.13
+VisualStudioVersion = 17.13.35806.99
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Outlook.Wpf", "Outlook.Wpf\Outlook.Wpf.csproj", "{A30DDFE9-4CCC-4D3B-A8C7-5AF0B2B6DAD4}"
 EndProject
@@ -9,9 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Outlook.Modules.Mail", "Mod
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Outlook.Modules.Contacts", "Modules\Outlook.Modules.Contacts\Outlook.Modules.Contacts.csproj", "{B08A7482-B25C-4D2E-A2B4-302C4E249599}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Outlook.Modules.Calendar", "Outlook.Modules.Calendar\Outlook.Modules.Calendar.csproj", "{98DBF33D-CDC7-4985-B4B0-7D0E534BDC69}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Outlook.Core", "Outlook.Core\Outlook.Core.csproj", "{5EF6B9BC-E328-45EA-9C19-A488EEE4E6CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Outlook.Modules.Calendar", "Modules\Outlook.Modules.Calendar\Outlook.Modules.Calendar.csproj", "{0D41E494-48D8-4FD3-8F5C-BA86F2A6B329}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,14 +31,14 @@ Global
 		{B08A7482-B25C-4D2E-A2B4-302C4E249599}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B08A7482-B25C-4D2E-A2B4-302C4E249599}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B08A7482-B25C-4D2E-A2B4-302C4E249599}.Release|Any CPU.Build.0 = Release|Any CPU
-		{98DBF33D-CDC7-4985-B4B0-7D0E534BDC69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{98DBF33D-CDC7-4985-B4B0-7D0E534BDC69}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{98DBF33D-CDC7-4985-B4B0-7D0E534BDC69}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{98DBF33D-CDC7-4985-B4B0-7D0E534BDC69}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5EF6B9BC-E328-45EA-9C19-A488EEE4E6CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5EF6B9BC-E328-45EA-9C19-A488EEE4E6CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5EF6B9BC-E328-45EA-9C19-A488EEE4E6CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5EF6B9BC-E328-45EA-9C19-A488EEE4E6CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D41E494-48D8-4FD3-8F5C-BA86F2A6B329}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D41E494-48D8-4FD3-8F5C-BA86F2A6B329}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D41E494-48D8-4FD3-8F5C-BA86F2A6B329}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D41E494-48D8-4FD3-8F5C-BA86F2A6B329}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

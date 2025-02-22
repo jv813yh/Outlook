@@ -1,10 +1,14 @@
-﻿using Prism.Ioc;
+﻿using Infragistics.Windows.OutlookBar;
+using Infragistics.Windows.Ribbon;
+using Outlook.Modules.Calendar;
+using Outlook.Modules.Contacts;
+using Outlook.Modules.Mail;
+using Outlook.Wpf.Core.Regions;
+using Prism.Ioc;
+using Prism.Modularity;
+using Prism.Regions;
 using Prism.Unity;
 using System.Windows;
-using Outlook.Modules.Mail;
-using Prism.Modularity;
-using Outlook.Modules.Contacts;
-using Outlook.Modules.Calendar;
 
 namespace Outlook.Wpf;
 
@@ -33,6 +37,20 @@ public partial class App : PrismApplication
         moduleCatalog.AddModule<MailModule>();
         moduleCatalog.AddModule<ContactModule>();
         moduleCatalog.AddModule<CalendarModule>();
+    }
+
+
+    /// <summary>
+    /// Configure the region adapter mappings
+    /// for UI controls that are used in the WPF application
+    /// and they need to be registered with the Prism framework to be used for region
+    /// </summary>
+    /// <param name="regionAdapterMappings"></param>
+    protected override void ConfigureRegionAdapterMappings(RegionAdapterMappings regionAdapterMappings)
+    {
+        base.ConfigureRegionAdapterMappings(regionAdapterMappings);
+        regionAdapterMappings.RegisterMapping(typeof(XamOutlookBar), Container.Resolve<XamOutlookBarRegionAdapter>());
+        regionAdapterMappings.RegisterMapping(typeof(XamRibbon), Container.Resolve<XamRibbonRegionAdapter>());
     }
 }
 

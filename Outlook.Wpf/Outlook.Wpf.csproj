@@ -21,10 +21,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Modules\Outlook.Modules.Calendar\Outlook.Modules.Calendar.csproj" />
     <ProjectReference Include="..\Modules\Outlook.Modules.Contacts\Outlook.Modules.Contacts.csproj" />
     <ProjectReference Include="..\Modules\Outlook.Modules.Mail\Outlook.Modules.Mail.csproj" />
     <ProjectReference Include="..\Outlook.Core\Outlook.Core.csproj" />
-    <ProjectReference Include="..\Outlook.Modules.Calendar\Outlook.Modules.Calendar.csproj" />
   </ItemGroup>
 
 </Project>
