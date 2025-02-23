@@ -29,7 +29,9 @@ public partial class App : PrismApplication
 
 
     /// <summary>
-    /// Configure all the modules that are used in the WPF application
+    /// Configure all the modules that are used
+    /// in the WPF application
+    /// for the Prism framework
     /// </summary>
     /// <param name="moduleCatalog"></param>
     protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
@@ -49,6 +51,8 @@ public partial class App : PrismApplication
     protected override void ConfigureRegionAdapterMappings(RegionAdapterMappings regionAdapterMappings)
     {
         base.ConfigureRegionAdapterMappings(regionAdapterMappings);
+
+        // Customers region adapter mappings
         regionAdapterMappings.RegisterMapping(typeof(XamOutlookBar), Container.Resolve<XamOutlookBarRegionAdapter>());
         regionAdapterMappings.RegisterMapping(typeof(XamRibbon), Container.Resolve<XamRibbonRegionAdapter>());
     }

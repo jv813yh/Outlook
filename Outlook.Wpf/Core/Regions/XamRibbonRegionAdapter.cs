@@ -27,7 +27,7 @@ namespace Outlook.Wpf.Core.Regions
             {
                 if (e.Action == NotifyCollectionChangedAction.Add)
                 {
-                    foreach (var item in e.OldItems)
+                    foreach (var item in e.NewItems)
                     {
                         if (item != null)
                         {

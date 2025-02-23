@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Outlook.Core", "Outlook.Cor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Outlook.Modules.Calendar", "Modules\Outlook.Modules.Calendar\Outlook.Modules.Calendar.csproj", "{0D41E494-48D8-4FD3-8F5C-BA86F2A6B329}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Outlook.Business", "Outlook.Business\Outlook.Business.csproj", "{883E0D94-2860-4650-9BC0-C80DCE091AF1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{0D41E494-48D8-4FD3-8F5C-BA86F2A6B329}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D41E494-48D8-4FD3-8F5C-BA86F2A6B329}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D41E494-48D8-4FD3-8F5C-BA86F2A6B329}.Release|Any CPU.Build.0 = Release|Any CPU
+		{883E0D94-2860-4650-9BC0-C80DCE091AF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{883E0D94-2860-4650-9BC0-C80DCE091AF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{883E0D94-2860-4650-9BC0-C80DCE091AF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{883E0D94-2860-4650-9BC0-C80DCE091AF1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

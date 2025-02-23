@@ -8,6 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Infragistics.WPF.DataTree.Trial" Version="24.2.53" />
+    <PackageReference Include="Infragistics.WPF.OutlookBar.Trial" Version="24.2.53" />
+    <PackageReference Include="Infragistics.WPF.Ribbon.Trial" Version="24.2.53" />
     <PackageReference Include="Prism.Core" Version="8.0.0.1909" />
     <PackageReference Include="Prism.Unity" Version="8.0.0.1909" />
     <PackageReference Include="Prism.Wpf" Version="8.0.0.1909" />
@@ -16,6 +19,10 @@
   <ItemGroup>
     <Folder Include="ViewModels\" />
     <Folder Include="Views\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Outlook.Core\Outlook.Core.csproj" />
   </ItemGroup>
 
 </Project>

@@ -6,7 +6,7 @@
     public static class RegionNames
     {
         public static string ContentRegion = "ContentRegion";
-        public static string XamOutlookBarRegion = "XamOutlookBarRegion";
+        public static string OutlookBarRegion = "OutlookBarRegion";
         public static string RibbonRegion = "RibbonRegion";
     }
 }

@@ -1,0 +1,24 @@
+﻿<ig:RibbonTabItem x:Class="Outlook.Modules.Mail.Menus.HomeTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ig="http://schemas.infragistics.com/xaml/wpf"
+             Header="Home">
+
+    <!-- The RibbonGroup is a container for Ribbon controls with name New -->
+    <ig:RibbonGroup Caption="New">
+        
+        <!-- In horizontal direction -->
+        <ig:ToolHorizontalWrapPanel>
+
+            <!-- Defines button in ribbon group New
+                 with text Button and shows image and text together -->
+            <ig:ButtonTool Caption="Button"
+                           ig:RibbonGroup.MaximumSize="ImageAndTextLarge"/>
+
+
+        </ig:ToolHorizontalWrapPanel>
+    </ig:RibbonGroup>
+
+</ig:RibbonTabItem>

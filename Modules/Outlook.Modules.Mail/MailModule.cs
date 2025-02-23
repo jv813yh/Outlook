@@ -1,7 +1,9 @@
 ﻿using Outlook.Core;
-using Outlook.Modules.Mail.Views;
+using Outlook.Modules.Mail.Menus;
+using Outlook.Modules.Mail.ViewModels;
 using Prism.Ioc;
 using Prism.Modularity;
+using Prism.Mvvm;
 using Prism.Regions;
 
 namespace Outlook.Modules.Mail
@@ -17,12 +19,14 @@ namespace Outlook.Modules.Mail
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            //throw new NotImplementedException();
+            ViewModelLocationProvider.Register<MailGroup, MailGroupViewModel>();
         }
 
         public void OnInitialized(IContainerProvider containerProvider)
         {
-            _regionManager.RegisterViewWithRegion(RegionNames.ContentRegion, typeof(ViewA));
+            // Register the views with the region manager that are used in the Mail module
+            _regionManager.RegisterViewWithRegion(RegionNames.RibbonRegion, typeof(HomeTab));
+            _regionManager.RegisterViewWithRegion(RegionNames.OutlookBarRegion, typeof(MailGroup));
         }
     }
 }

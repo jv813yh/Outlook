@@ -7,4 +7,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Infragistics.WPF.Ribbon.Trial" Version="24.2.53" />
+  </ItemGroup>
+
 </Project>
