@@ -14,6 +14,6 @@ namespace Outlook.Modules.Contacts.Menus
         }
 
         public string DefaultNavigationPath 
-            => "ViewContacts";
+            => "ViewA";
     }
 }

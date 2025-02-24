@@ -9,6 +9,12 @@ using Prism.Modularity;
 using Prism.Regions;
 using Prism.Unity;
 using System.Windows;
+using Outlook.Core.Interfaces;
+using Outlook.Core.Commands;
+using Outlook.Modules.Mail.Menus;
+using Outlook.Modules.Mail.ViewModels;
+using Outlook.Wpf.ViewModels;
+using Prism.Mvvm;
 
 namespace Outlook.Wpf;
 
@@ -19,7 +25,9 @@ public partial class App : PrismApplication
 {
     protected override void RegisterTypes(IContainerRegistry containerRegistry)
     {
-        
+        containerRegistry.RegisterSingleton<IApplicationCommands, ApplicationCommands>();
+
+        ViewModelLocationProvider.Register<MainWindow, MainWindowViewModel>();
     }
 
     protected override Window CreateShell()

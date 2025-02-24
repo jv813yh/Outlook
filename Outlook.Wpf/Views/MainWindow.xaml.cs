@@ -13,23 +13,29 @@ namespace Outlook.Wpf;
 /// </summary>
 public partial class MainWindow : XamRibbonWindow
 {
-    private readonly IRegionManager _regionManager; 
-    public MainWindow(IRegionManager regionManager)
+    private readonly IApplicationCommands _applicationCommands; 
+
+    public MainWindow(IApplicationCommands applicationCommands, IRegionManager regionManager)
     {
         InitializeComponent();
 
-        _regionManager = regionManager;
+        _applicationCommands = applicationCommands;
 
         // Set the application theme to Office2013
         ThemeManager.ApplicationTheme = new Office2013Theme();
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void XamOutlookBar_OnSelectedGroupChanged(object sender, RoutedEventArgs e)
     {
         var group = (sender as XamOutlookBar).SelectedGroup as IOutlookBarGroup;
         if (group != null)
         {
-            _regionManager.RequestNavigate(RegionNames.ContentRegion, group.DefaultNavigationPath);
+            _applicationCommands.NavigateCommand.Execute(group.DefaultNavigationPath);
         }
     }
 }    

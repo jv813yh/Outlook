@@ -1,5 +1,7 @@
 ﻿using Outlook.Core;
 using Outlook.Modules.Contacts.Menus;
+using Outlook.Modules.Contacts.ViewModels;
+using Outlook.Modules.Contacts.Views;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
@@ -16,7 +18,7 @@ namespace Outlook.Modules.Contacts
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-           
+           containerRegistry.RegisterForNavigation<ViewA, ViewAViewModel>();
         }
 
         public void OnInitialized(IContainerProvider containerProvider)
