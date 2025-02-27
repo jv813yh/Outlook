@@ -12,13 +12,16 @@
                        prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid>
         
-        <ig:XamDataTree ItemsSource="{Binding Items}">
+        <ig:XamDataTree x:Name="DataTree"
+            ItemsSource="{Binding Items}">
+
             <i:Interaction.Triggers>
                 <i:EventTrigger  EventName="ActiveNodeChanged">
                     <prism:InvokeCommandAction Command="{Binding SelectedCommand}" 
                                                TriggerParameterPath="NewActiveTreeNode.Data"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
+
             <ig:XamDataTree.GlobalNodeLayouts>
                 <ig:NodeLayout Key="GlobalLayout"
                                DisplayMemberPath="Caption"

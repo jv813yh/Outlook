@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:ig="http://schemas.infragistics.com/xaml/wpf"
-             Header="Home">
+             Header="Mail">
 
     <!-- The RibbonGroup is a container for Ribbon controls with name New -->
     <ig:RibbonGroup Caption="New">

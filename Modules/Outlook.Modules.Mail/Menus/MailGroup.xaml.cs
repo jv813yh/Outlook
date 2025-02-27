@@ -1,4 +1,6 @@
-﻿using Infragistics.Windows.OutlookBar;
+﻿using Infragistics.Controls.Menus;
+using Infragistics.Windows.OutlookBar;
+using Outlook.Business;
 using Outlook.Core.Interfaces;
 
 namespace Outlook.Modules.Mail.Menus
@@ -14,6 +16,24 @@ namespace Outlook.Modules.Mail.Menus
         }
 
         public string DefaultNavigationPath
-            => "MailList";
+        {
+            get
+            {
+                // Get the selected item from the tree view when we go back to the mail list
+                var item = DataTree.SelectionSettings.SelectedNodes[0] as XamDataTreeNode;
+                if (item != null)
+                {
+                    var navigationPath = (item.Data as NavigationItem).NavigationPath;
+
+                    if (!string.IsNullOrEmpty(navigationPath))
+                    {
+                        return navigationPath;
+                    }
+                }
+
+                // Default navigation path
+                return "MailList";
+            }
+        }
     }
 }

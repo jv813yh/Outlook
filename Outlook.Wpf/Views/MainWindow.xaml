@@ -35,6 +35,11 @@
 
             </igWpf:XamOutlookBar>
 
+
+            <!-- The ContentControl is where the views will be injected by ContentRegion with Prism -->
+            <ContentControl prism:RegionManager.RegionName="{x:Static core:RegionNames.ContentRegion}"/>
+
+            <!--  -->
             <TextBlock DataContext="{Binding ErrorMessageViewModel}"
                        Text="{Binding Message}"
                        Visibility="{Binding IsActive, Converter={StaticResource ErrorMessageBooleanToVisibilityConverter}}"
@@ -42,9 +47,6 @@
                        FontSize="16"
                        DockPanel.Dock="Bottom"
                        Margin="10"/>
-
-            <!-- The ContentControl is where the views will be injected by ContentRegion with Prism-->
-            <ContentControl prism:RegionManager.RegionName="{x:Static core:RegionNames.ContentRegion}"/>
         </DockPanel>
     </igWpf:RibbonWindowContentHost>
 </ig:XamRibbonWindow>

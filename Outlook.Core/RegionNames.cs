@@ -5,8 +5,8 @@
     /// </summary>
     public static class RegionNames
     {
-        public static string ContentRegion = "ContentRegion";
-        public static string OutlookBarRegion = "OutlookBarRegion";
-        public static string RibbonRegion = "RibbonRegion";
+        public const string ContentRegion = "ContentRegion";
+        public const string OutlookBarRegion = "OutlookBarRegion";
+        public const string RibbonRegion = "RibbonRegion";
     }
 }

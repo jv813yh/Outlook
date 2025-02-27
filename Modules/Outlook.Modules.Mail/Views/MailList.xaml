@@ -4,7 +4,7 @@
              xmlns:prism="http://prismlibrary.com/"             
              prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid>
-        <TextBlock Text="Test from Mail List View"
+        <TextBlock Text="{Binding Title}"
                    FontSize="20"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"/>

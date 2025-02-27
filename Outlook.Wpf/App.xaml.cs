@@ -1,20 +1,18 @@
 ﻿using Infragistics.Windows.OutlookBar;
 using Infragistics.Windows.Ribbon;
+using Outlook.Core.Commands;
+using Outlook.Core.Interfaces;
 using Outlook.Modules.Calendar;
 using Outlook.Modules.Contacts;
 using Outlook.Modules.Mail;
 using Outlook.Wpf.Core.Regions;
+using Outlook.Wpf.ViewModels;
 using Prism.Ioc;
 using Prism.Modularity;
+using Prism.Mvvm;
 using Prism.Regions;
 using Prism.Unity;
 using System.Windows;
-using Outlook.Core.Interfaces;
-using Outlook.Core.Commands;
-using Outlook.Modules.Mail.Menus;
-using Outlook.Modules.Mail.ViewModels;
-using Outlook.Wpf.ViewModels;
-using Prism.Mvvm;
 
 namespace Outlook.Wpf;
 

@@ -1,8 +1,8 @@
-﻿using Prism.Mvvm;
+﻿using Outlook.Core.ViewModels;
 
 namespace Outlook.Modules.Contacts.ViewModels
 {
-    public class ViewAViewModel : BindableBase
+    public class ViewAViewModel : ViewModelBase
     {
     }
 }

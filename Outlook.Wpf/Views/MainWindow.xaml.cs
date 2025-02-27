@@ -1,7 +1,6 @@
 ﻿using Infragistics.Themes;
 using Infragistics.Windows.OutlookBar;
 using Infragistics.Windows.Ribbon;
-using Outlook.Core;
 using Outlook.Core.Interfaces;
 using Prism.Regions;
 using System.Windows;
@@ -15,7 +14,7 @@ public partial class MainWindow : XamRibbonWindow
 {
     private readonly IApplicationCommands _applicationCommands; 
 
-    public MainWindow(IApplicationCommands applicationCommands, IRegionManager regionManager)
+    public MainWindow(IApplicationCommands applicationCommands)
     {
         InitializeComponent();
 

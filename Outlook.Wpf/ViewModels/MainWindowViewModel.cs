@@ -1,13 +1,13 @@
-﻿using System.Diagnostics;
-using Outlook.Core;
+﻿using Outlook.Core;
 using Outlook.Core.Interfaces;
+using Outlook.Core.ViewModels;
 using Prism.Commands;
-using Prism.Mvvm;
 using Prism.Regions;
+using System.Diagnostics;
 
 namespace Outlook.Wpf.ViewModels
 {
-    public class MainWindowViewModel : BindableBase
+    public class MainWindowViewModel : ViewModelBase
     {
         private IRegionManager _regionManager;
 
@@ -27,6 +27,7 @@ namespace Outlook.Wpf.ViewModels
         public MainWindowViewModel(IRegionManager regionManager, IApplicationCommands applicationCommands)
         {
             _regionManager = regionManager;
+            // Register composite command for navigation
             applicationCommands.NavigateCommand.RegisterCommand(NavigateCommand);
             _errorMessageViewModel = new MessageViewModel();
         }
