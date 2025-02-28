@@ -62,5 +62,16 @@ public partial class App : PrismApplication
         regionAdapterMappings.RegisterMapping(typeof(XamOutlookBar), Container.Resolve<XamOutlookBarRegionAdapter>());
         regionAdapterMappings.RegisterMapping(typeof(XamRibbon), Container.Resolve<XamRibbonRegionAdapter>());
     }
+
+    /// <summary>
+    /// Register custom region behaviors
+    /// </summary>
+    /// <param name="regionBehaviors"></param>
+    protected override void ConfigureDefaultRegionBehaviors(IRegionBehaviorFactory regionBehaviors)
+    {
+        base.ConfigureDefaultRegionBehaviors(regionBehaviors);
+
+        regionBehaviors.AddIfMissing(DependentViewRegionBehavior.BehaviorKey, typeof(DependentViewRegionBehavior));
+    }
 }
 

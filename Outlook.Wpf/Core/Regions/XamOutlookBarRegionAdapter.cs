@@ -1,5 +1,6 @@
 ﻿using Infragistics.Windows.OutlookBar;
 using Prism.Regions;
+using System.Collections.Specialized;
 
 namespace Outlook.Wpf.Core.Regions
 {
@@ -14,7 +15,7 @@ namespace Outlook.Wpf.Core.Regions
         {
             region.Views.CollectionChanged += (s, e) =>
             {
-                if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
+                if (e.Action == NotifyCollectionChangedAction.Add)
                 {
                     foreach (var item in e.NewItems)
                     {
@@ -30,7 +31,7 @@ namespace Outlook.Wpf.Core.Regions
                         }
                     }
                 }
-                else if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
+                else if (e.Action == NotifyCollectionChangedAction.Remove)
                 {
                     foreach (OutlookBarGroup group in e.OldItems)
                     {

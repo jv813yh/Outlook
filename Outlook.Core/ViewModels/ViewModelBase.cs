@@ -4,6 +4,7 @@ using Prism.Regions;
 namespace Outlook.Core.ViewModels
 {
     /*
+     * ViewModelBase base class for all view models in the application.
      *
      * BindableBase:
      * Is used in Prism to implement INotifyPropertyChanged
