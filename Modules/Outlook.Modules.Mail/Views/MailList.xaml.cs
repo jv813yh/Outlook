@@ -1,7 +1,8 @@
-﻿using System.Windows.Controls;
-using Outlook.Core;
+﻿using Outlook.Core;
 using Outlook.Core.Attributes;
+using Outlook.Core.Interfaces;
 using Outlook.Modules.Mail.Menus;
+using System.Windows.Controls;
 
 namespace Outlook.Modules.Mail.Views
 {
@@ -9,7 +10,7 @@ namespace Outlook.Modules.Mail.Views
     /// Interaction logic for MailList
     /// </summary>
     [DependentView(RegionNames.RibbonRegion, typeof(HomeTab))]
-    public partial class MailList : UserControl
+    public partial class MailList : UserControl, ISupportDataContext
     {
         public MailList()
         {

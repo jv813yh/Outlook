@@ -39,7 +39,9 @@
             <!-- The ContentControl is where the views will be injected by ContentRegion with Prism -->
             <ContentControl prism:RegionManager.RegionName="{x:Static core:RegionNames.ContentRegion}"/>
 
-            <!--  -->
+            <!-- 
+            
+            -->
             <TextBlock DataContext="{Binding ErrorMessageViewModel}"
                        Text="{Binding Message}"
                        Visibility="{Binding IsActive, Converter={StaticResource ErrorMessageBooleanToVisibilityConverter}}"

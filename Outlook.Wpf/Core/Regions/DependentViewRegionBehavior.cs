@@ -4,6 +4,8 @@ using System.Collections.Specialized;
 using System.Resources;
 using Outlook.Wpf.Models;
 using Prism.Ioc;
+using System.Windows;
+using Outlook.Core.Interfaces;
 
 namespace Outlook.Wpf.Core.Regions
 {
@@ -21,7 +23,7 @@ namespace Outlook.Wpf.Core.Regions
     public class DependentViewRegionBehavior : RegionBehavior
     {
         private readonly IContainerExtension _containerExtension;
-        private readonly Dictionary<object, IList<DependentViewInfo>> _dependentViewCache;
+        private readonly Dictionary<object, List<DependentViewInfo>> _dependentViewCache;
 
         // For registration region behavior in Prism
         public const string BehaviorKey = "DependentViewRegionBehavior";
@@ -29,7 +31,7 @@ namespace Outlook.Wpf.Core.Regions
         public DependentViewRegionBehavior(IContainerExtension containerExtension)
         {
             _containerExtension = containerExtension;
-            _dependentViewCache = new Dictionary<object, IList<DependentViewInfo>>();
+            _dependentViewCache = new Dictionary<object, List<DependentViewInfo>>();
         }
 
         /// <summary>
@@ -39,7 +41,6 @@ namespace Outlook.Wpf.Core.Regions
         {
             Region.ActiveViews.CollectionChanged += ActiveViews_CollectionChanged;
         }
-
 
         /// <summary>
         /// 
@@ -54,12 +55,31 @@ namespace Outlook.Wpf.Core.Regions
                 {
                     var dependentViews = new List<DependentViewInfo>();
 
-                    // get the custom attributes of the view
-                    var atts = GetCustomAttributes<DependentViewAttribute>(view.GetType());
-
-                    foreach (var att in atts)
+                    if (_dependentViewCache.ContainsKey(view))
                     {
-                        dependentViews.Add(CreateDependentViewInfo(att));
+                        dependentViews = _dependentViewCache[view];
+                    }
+                    else
+                    {
+                        // get the custom attributes of the view
+                        var atts = GetCustomAttributes<DependentViewAttribute>(view.GetType());
+
+                        foreach (var att in atts)
+                        {
+                            var info = CreateDependentViewInfo(att);
+
+                            // Set the DataContext of the dependent view to the DataContext of the view
+                            if (info.View is ISupportDataContext infoDC &&
+                                view is ISupportDataContext viewDC)
+                            {
+                                infoDC.DataContext = viewDC.DataContext;
+                            }
+
+                            dependentViews.Add(info);
+                        }
+
+                        // add to cache
+                        _dependentViewCache.Add(view, dependentViews);
                     }
 
                     // add dependent views to the region
@@ -67,6 +87,7 @@ namespace Outlook.Wpf.Core.Regions
                     {
                         if (Region.RegionManager.Regions.ContainsRegionWithName(dependentView.Region))
                         {
+                            // add dependent views to the region
                             Region.RegionManager.Regions[dependentView.Region].Add(dependentView.View);
                         }
                     }
@@ -74,9 +95,69 @@ namespace Outlook.Wpf.Core.Regions
             }
             else if (e.Action == NotifyCollectionChangedAction.Remove)
             {
+                foreach (var oldViews in e.OldItems)
+                {
+                    if (_dependentViewCache.ContainsKey(oldViews))
+                    {
+                        _dependentViewCache[oldViews].ForEach(dependentView =>
+                        {
+                            if (Region.RegionManager.Regions.ContainsRegionWithName(dependentView.Region))
+                            {
+                                // remove dependent views from the region
+                                Region.RegionManager.Regions[dependentView.Region].Remove(dependentView.View);
+                            }
 
+                            if (!ShouldKeepAlive(oldViews))
+                            {
+                                _dependentViewCache.Remove(oldViews);
+                            }
+                        });
+                    }
+                }
             }
         }
+
+        private bool ShouldKeepAlive(object oldViews)
+        {
+            var lifeTime = GetViewOrDataContextLifeTime(oldViews);
+            if (lifeTime != null)
+            {
+                return lifeTime.KeepAlive;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// IRagionMemberLifetime determines whether a View instance
+        /// remains in memory or is destroyed when navigating between Views in regions.
+        /// </summary>
+        /// <param name="view"></param>
+        /// <returns></returns>
+        IRegionMemberLifetime? GetViewOrDataContextLifeTime(object view)
+        {
+            if (view is IRegionMemberLifetime lifetime)
+            {
+                return lifetime;
+            }
+
+            if (view is FrameworkElement frameworkElement)
+            {
+                return frameworkElement.DataContext as IRegionMemberLifetime;
+            }
+
+            return null;
+        }
+
+        /*
+         * Object  
+             └─ DispatcherObject  -  threading, marshaling, and synchronization
+                 └─ DependencyObject  -  data binding, resources, styles, templates
+                     └─ Visual  -  rendering, hit testing, and input
+                         └─ UIElement  -  layout, input, events, automation
+                             └─ FrameworkElement -  layout, data binding and events...
+         *
+         */
 
         /// <summary>
         /// Get custom attributes 
@@ -84,8 +165,11 @@ namespace Outlook.Wpf.Core.Regions
         /// <typeparam name="T"></typeparam>
         /// <param name="type"></param>
         /// <returns></returns>
-        private static IEnumerable<T> GetCustomAttributes<T>(Type type)
-         => type.GetCustomAttributes(typeof(T), true).OfType<T>();
+        //private IEnumerable<T> GetCustomAttributes<T>(Type type)
+        // => type.GetCustomAttributes(typeof(T), true).OfType<T>();
+
+        private IEnumerable<T> GetCustomAttributes<T>(Type type)
+            => type.GetCustomAttributes(typeof(T), true).OfType<T>();
 
 
         /// <summary>

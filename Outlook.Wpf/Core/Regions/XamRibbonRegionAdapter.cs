@@ -55,8 +55,6 @@ namespace Outlook.Wpf.Core.Regions
         }
 
         protected override IRegion CreateRegion()
-        {
-            return new SingleActiveRegion();
-        }
+         => new SingleActiveRegion();
     }
 }

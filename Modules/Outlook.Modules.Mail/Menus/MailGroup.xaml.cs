@@ -8,6 +8,8 @@ namespace Outlook.Modules.Mail.Menus
     /// <summary>
     /// Interaction logic for MailGroup.xaml
     /// </summary>
+    ///
+    /// OutlookBarGroup is navigation bar with multiple groups of items
     public partial class MailGroup : OutlookBarGroup, IOutlookBarGroup
     {
         public MailGroup()
@@ -32,7 +34,7 @@ namespace Outlook.Modules.Mail.Menus
                 }
 
                 // Default navigation path
-                return "MailList";
+                return "MailList?id=Default";
             }
         }
     }
