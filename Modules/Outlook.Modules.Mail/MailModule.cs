@@ -29,7 +29,7 @@ namespace Outlook.Modules.Mail
         public void OnInitialized(IContainerProvider containerProvider)
         {
             // Register the views with the region manager that are used in the Mail module
-            //_regionManager.RegisterViewWithRegion(RegionNames.RibbonRegion, typeof(HomeTab));
+           // _regionManager.RegisterViewWithRegion(RegionNames.RibbonRegion, typeof(HomeTab));
             _regionManager.RegisterViewWithRegion(RegionNames.OutlookBarRegion, typeof(MailGroup));
         }
     }

@@ -1,4 +1,7 @@
-﻿using Outlook.Core.ViewModels;
+﻿using System.Windows;
+using System.Windows.Input;
+using Outlook.Core.ViewModels;
+using Prism.Commands;
 using Prism.Regions;
 
 namespace Outlook.Modules.Mail.ViewModels
@@ -10,6 +13,17 @@ namespace Outlook.Modules.Mail.ViewModels
         {
             get => _title;
             set => SetProperty(ref _title, value);
+        }
+
+        private DelegateCommand _testCommand;
+        public DelegateCommand TestCommand =>
+            _testCommand ?? (_testCommand = new DelegateCommand(ExecuteTestCommand));
+
+        private void ExecuteTestCommand()
+        {
+            // TODO
+            MessageBox.Show("Test Command", "Test",
+                MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         public MailListViewModel()

@@ -23,6 +23,7 @@ namespace Outlook.Modules.Contacts
 
         public void OnInitialized(IContainerProvider containerProvider)
         {
+            //_regionManager.RegisterViewWithRegion(RegionNames.RibbonRegion, typeof(HomeTab));
             _regionManager.RegisterViewWithRegion(RegionNames.OutlookBarRegion, typeof(ContactsGroup));
         }
     }

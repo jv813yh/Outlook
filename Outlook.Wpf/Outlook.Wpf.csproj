@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Infragistics.WPF.DataGrids.Trial" Version="24.2.53" />
     <PackageReference Include="Infragistics.WPF.OutlookBar.Trial" Version="24.2.53" />
     <PackageReference Include="Infragistics.WPF.Ribbon.Trial" Version="24.2.53" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />

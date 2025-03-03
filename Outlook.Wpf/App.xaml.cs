@@ -70,7 +70,6 @@ public partial class App : PrismApplication
     protected override void ConfigureDefaultRegionBehaviors(IRegionBehaviorFactory regionBehaviors)
     {
         base.ConfigureDefaultRegionBehaviors(regionBehaviors);
-
         regionBehaviors.AddIfMissing(DependentViewRegionBehavior.BehaviorKey, typeof(DependentViewRegionBehavior));
     }
 }

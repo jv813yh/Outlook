@@ -1,11 +1,10 @@
 ﻿using Outlook.Core.Attributes;
-using Prism.Regions;
-using System.Collections.Specialized;
-using System.Resources;
+using Outlook.Core.Interfaces;
 using Outlook.Wpf.Models;
 using Prism.Ioc;
+using Prism.Regions;
+using System.Collections.Specialized;
 using System.Windows;
-using Outlook.Core.Interfaces;
 
 namespace Outlook.Wpf.Core.Regions
 {
@@ -13,11 +12,8 @@ namespace Outlook.Wpf.Core.Regions
      * RegionBehavior class that allows you to add specific behavior to regions in your application.
      * It helps extend the functionality of RegionManager and customize the way regions work.
      *
-     * Each region in Prism can have special behaviors, for example:
-     * BindRegionContextToDependencyObjectBehavior - automatically sets the DataContext for regional views.
-     * AutoPopulateRegionBehavior - automatically adds Views to a region on initialization.
-     *
-     * Custom region behavior that allows you to manage dependent views in a region.
+     * It does not modify the visual element (UIElement) itself, it only modifies the behavior of the region.
+     * Automatic DataContext setup, view lifecycle management, etc.
      *
      */
     public class DependentViewRegionBehavior : RegionBehavior
@@ -41,6 +37,7 @@ namespace Outlook.Wpf.Core.Regions
         {
             Region.ActiveViews.CollectionChanged += ActiveViews_CollectionChanged;
         }
+
 
         /// <summary>
         /// 
@@ -150,7 +147,7 @@ namespace Outlook.Wpf.Core.Regions
         }
 
         /*
-         * Object  
+         * Object
              └─ DispatcherObject  -  threading, marshaling, and synchronization
                  └─ DependencyObject  -  data binding, resources, styles, templates
                      └─ Visual  -  rendering, hit testing, and input
@@ -165,9 +162,6 @@ namespace Outlook.Wpf.Core.Regions
         /// <typeparam name="T"></typeparam>
         /// <param name="type"></param>
         /// <returns></returns>
-        //private IEnumerable<T> GetCustomAttributes<T>(Type type)
-        // => type.GetCustomAttributes(typeof(T), true).OfType<T>();
-
         private IEnumerable<T> GetCustomAttributes<T>(Type type)
             => type.GetCustomAttributes(typeof(T), true).OfType<T>();
 

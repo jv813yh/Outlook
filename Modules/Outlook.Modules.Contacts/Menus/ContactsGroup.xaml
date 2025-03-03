@@ -8,7 +8,7 @@
              Header="Contacts">
     <Grid>
 
-        <TextBlock Text="Testing again from Contacts"
+        <TextBlock Text="From Contacts"
                    FontSize="20"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"/>

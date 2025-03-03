@@ -3,6 +3,7 @@ using Outlook.Core.Interfaces;
 using Outlook.Core.ViewModels;
 using Prism.Commands;
 using System.Collections.ObjectModel;
+using Prism;
 
 namespace Outlook.Modules.Mail.ViewModels
 {
@@ -17,13 +18,11 @@ namespace Outlook.Modules.Mail.ViewModels
 
         private ObservableCollection<NavigationItem> _items;
 
-
         public ObservableCollection<NavigationItem> Items
         {
             get => _items;
             set => SetProperty(ref _items, value);
         }
-
 
         public MailGroupViewModel(IApplicationCommands applicationCommands)
         {

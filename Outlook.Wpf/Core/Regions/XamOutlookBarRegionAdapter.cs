@@ -5,9 +5,8 @@ using System.Collections.Specialized;
 namespace Outlook.Wpf.Core.Regions
 {
     /*
-     * When Prism handles regions, it is possible that the region will not work properly
-     * with the standard way of adding views (region.Add(view)).
-     * Therefore, there are RegionBehavior classes that allow for customisation.
+     * RegionAdapterBase<T> defines how to add and remove views to these elements (UI controls),
+     * that WPF does not know how to manage.
      */
 
     public class XamOutlookBarRegionAdapter : RegionAdapterBase<XamOutlookBar>
