@@ -7,7 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Prism.Core" Version="8.0.0.1909" />
+    <ProjectReference Include="..\..\Outlook.Business\Outlook.Business.csproj" />
+    <ProjectReference Include="..\Interfaces\Outlook.Services.Interfaces\Outlook.Services.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>

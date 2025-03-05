@@ -26,7 +26,9 @@ namespace Outlook.Wpf.Core.Regions
         {
             // CollectionChanged for all views in the region
             region.Views.CollectionChanged += (s, e) =>
-            {
+            { 
+                var test = region.Views;
+                var testActive = region.ActiveViews;
                 if (e.Action == NotifyCollectionChangedAction.Add)
                 {
                     foreach (var item in e.NewItems)
@@ -41,6 +43,8 @@ namespace Outlook.Wpf.Core.Regions
                             {
                                 regionTarget.SelectedGroup = group;
                             }
+
+                            var selected = regionTarget.SelectedGroup;
                         }
                     }
                 }

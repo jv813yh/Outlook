@@ -1,5 +1,7 @@
-﻿using System.Windows;
+﻿using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
+using Outlook.Business;
 using Outlook.Core.ViewModels;
 using Prism.Commands;
 using Prism.Regions;
@@ -15,6 +17,14 @@ namespace Outlook.Modules.Mail.ViewModels
             set => SetProperty(ref _title, value);
         }
 
+        // list of mail messages
+        private ObservableCollection<MailMessage> _mailMessages;
+        public ObservableCollection<MailMessage> MailMessages
+        {
+            get { return _mailMessages; }
+            set { SetProperty(ref _mailMessages, value); }
+        }
+
         private DelegateCommand _testCommand;
         public DelegateCommand TestCommand =>
             _testCommand ?? (_testCommand = new DelegateCommand(ExecuteTestCommand));
@@ -28,7 +38,7 @@ namespace Outlook.Modules.Mail.ViewModels
 
         public MailListViewModel()
         {
-
+            _mailMessages = new ObservableCollection<MailMessage>();
         }
 
         public override void OnNavigatedTo(NavigationContext navigationContext)

@@ -15,6 +15,7 @@
 
         </igWpf:XamDataGrid>
 
+
         <!-- Form of selected mail -->
         <Grid
             Background="LightBlue"

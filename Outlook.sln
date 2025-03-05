@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Outlook.Modules.Calendar", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Outlook.Business", "Outlook.Business\Outlook.Business.csproj", "{883E0D94-2860-4650-9BC0-C80DCE091AF1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Outlook.Services", "Services\Outlook.Services\Outlook.Services.csproj", "{FFCD9B4A-BA2F-4D05-8026-6EB1D35939F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Outlook.Services.Interfaces", "Services\Interfaces\Outlook.Services.Interfaces\Outlook.Services.Interfaces.csproj", "{2E9CF916-41E2-4551-A374-6356F80AC534}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,14 @@ Global
 		{883E0D94-2860-4650-9BC0-C80DCE091AF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{883E0D94-2860-4650-9BC0-C80DCE091AF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{883E0D94-2860-4650-9BC0-C80DCE091AF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFCD9B4A-BA2F-4D05-8026-6EB1D35939F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFCD9B4A-BA2F-4D05-8026-6EB1D35939F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFCD9B4A-BA2F-4D05-8026-6EB1D35939F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFCD9B4A-BA2F-4D05-8026-6EB1D35939F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E9CF916-41E2-4551-A374-6356F80AC534}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E9CF916-41E2-4551-A374-6356F80AC534}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E9CF916-41E2-4551-A374-6356F80AC534}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E9CF916-41E2-4551-A374-6356F80AC534}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
