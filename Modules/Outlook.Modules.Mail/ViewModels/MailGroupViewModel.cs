@@ -45,30 +45,38 @@ namespace Outlook.Modules.Mail.ViewModels
 
         void GenerateMenu()
         {
+            
             // Create the root item
             var root = new NavigationItem()
             {
-                Caption = "Personal Folders",
-                NavigationPath = "MailList?id=Default"
+                Caption = FolderParameters.PersonalFolder,
+                NavigationPath = "MailList?id=Default",
+                IsExpanded = true
             };
 
             // Items ...
             root.Items.Add(new NavigationItem()
             {
-                Caption = "Inbox",
-                NavigationPath = "MailList?id=Inbox"
+                Caption = FolderParameters.Inbox,
+                NavigationPath = FolderParameters.GetNavigationPath(FolderParameters.MailListPath, 
+                                 FolderParameters.FolderKey,
+                                 FolderParameters.Inbox)
             });
 
             root.Items.Add(new NavigationItem()
             {
-                Caption = "Deleted",
-                NavigationPath = "MailList?id=Deleted"
+                Caption = FolderParameters.Deleted,
+                NavigationPath = FolderParameters.GetNavigationPath(FolderParameters.MailListPath, 
+                                 FolderParameters.FolderKey,
+                                 FolderParameters.Deleted)
             });
 
             root.Items.Add(new NavigationItem()
             {
-                Caption = "Sent",
-                NavigationPath = "MailList?id=Sent"
+                Caption = FolderParameters.Sent,
+                NavigationPath = FolderParameters.GetNavigationPath(FolderParameters.MailListPath, 
+                                 FolderParameters.FolderKey, 
+                                 FolderParameters.Sent)
             });
 
 

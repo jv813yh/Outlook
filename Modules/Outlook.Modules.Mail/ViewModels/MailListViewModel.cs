@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using Outlook.Business;
 using Outlook.Core.ViewModels;
+using Outlook.Services.Interfaces.MailInterfaces;
 using Prism.Commands;
 using Prism.Regions;
 
@@ -10,11 +11,23 @@ namespace Outlook.Modules.Mail.ViewModels
 {
 	public class MailListViewModel : ViewModelBase
     {
+        // Service to work with mail messages
+        private readonly IMailService _mailService;
+
+
         private string _title = "Default";
         public string Title
         {
             get => _title;
             set => SetProperty(ref _title, value);
+        }
+
+        // selected mail message from UI
+        private MailMessage _selectedMailMessage;
+        public MailMessage SelectedMailMessage
+        {
+            get { return _selectedMailMessage; }
+            set { SetProperty(ref _selectedMailMessage, value); }
         }
 
         // list of mail messages
@@ -36,14 +49,27 @@ namespace Outlook.Modules.Mail.ViewModels
                 MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
-        public MailListViewModel()
+        public MailListViewModel(IMailService mailService)
         {
-            _mailMessages = new ObservableCollection<MailMessage>();
+            _mailService = mailService;
         }
 
         public override void OnNavigatedTo(NavigationContext navigationContext)
         {
-            Title = navigationContext.Parameters.GetValue<string>("id");
+            var folder = navigationContext.Parameters.GetValue<string>(FolderParameters.FolderKey);
+
+            switch (folder)
+            {
+                case FolderParameters.Inbox:
+                    MailMessages = new ObservableCollection<MailMessage>(_mailService.GetMailMessages());
+                    break;
+                case FolderParameters.Sent:
+                    MailMessages = new ObservableCollection<MailMessage>(_mailService.SentMailMailMessages());
+                    break;
+                case FolderParameters.Deleted:
+                    MailMessages = new ObservableCollection<MailMessage>(_mailService.GetDeletedMessages());
+                    break;
+            }
         }
     }
 }

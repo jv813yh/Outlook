@@ -2,6 +2,8 @@
 using Outlook.Modules.Mail.Menus;
 using Outlook.Modules.Mail.ViewModels;
 using Outlook.Modules.Mail.Views;
+using Outlook.Services.Interfaces.MailInterfaces;
+using Outlook.Services.MailServices;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Mvvm;
@@ -23,6 +25,10 @@ namespace Outlook.Modules.Mail
             // if we want to implicitly register the view model with the view
             ViewModelLocationProvider.Register<MailGroup, MailGroupViewModel>();
 
+            // Register the mail service with the container
+            containerRegistry.RegisterSingleton<IMailService, MailProvider>();
+
+            // Register the views with the container for navigation
             containerRegistry.RegisterForNavigation<MailList, MailListViewModel>();
         }
 

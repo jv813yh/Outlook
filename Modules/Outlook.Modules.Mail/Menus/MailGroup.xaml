@@ -18,14 +18,16 @@
             <i:Interaction.Triggers>
                 <i:EventTrigger  EventName="ActiveNodeChanged">
                     <prism:InvokeCommandAction Command="{Binding SelectedCommand}" 
-                                               TriggerParameterPath="NewActiveTreeNode.Data"/>
+                                               TriggerParameterPath="NewActiveTreeNode.Data"
+                                               />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
 
             <ig:XamDataTree.GlobalNodeLayouts>
                 <ig:NodeLayout Key="GlobalLayout"
                                DisplayMemberPath="Caption"
-                               TargetTypeName="NavigationItem"/>
+                               TargetTypeName="NavigationItem"
+                               IsExpandedMemberPath="IsExpanded"/>
             </ig:XamDataTree.GlobalNodeLayouts>
         </ig:XamDataTree>
 

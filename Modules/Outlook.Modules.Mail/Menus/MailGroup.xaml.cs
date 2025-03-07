@@ -34,7 +34,7 @@ namespace Outlook.Modules.Mail.Menus
                 }
 
                 // Default navigation path
-                return "MailList?id=Default";
+                return FolderParameters.GetNavigationPath(FolderParameters.MailListPath, FolderParameters.FolderKey ,FolderParameters.Inbox);
             }
         }
     }

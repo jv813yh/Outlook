@@ -27,6 +27,7 @@
     <ProjectReference Include="..\..\Outlook.Business\Outlook.Business.csproj" />
     <ProjectReference Include="..\..\Outlook.Core\Outlook.Core.csproj" />
     <ProjectReference Include="..\..\Services\Interfaces\Outlook.Services.Interfaces\Outlook.Services.Interfaces.csproj" />
+    <ProjectReference Include="..\..\Services\Outlook.Services\Outlook.Services.csproj" />
   </ItemGroup>
 
 </Project>

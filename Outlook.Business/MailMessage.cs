@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Dynamic;
 
 namespace Outlook.Business
 {
@@ -15,7 +14,6 @@ namespace Outlook.Business
         }
 
         private string _subject;
-
         public string Subject
         {
             get { return _subject; }
@@ -30,14 +28,13 @@ namespace Outlook.Business
         }
 
         private ObservableCollection<string> _cc;
-        public ObservableCollection<string> Cc
+        public ObservableCollection<string> CC
         {
             get { return _cc; }
             set { SetProperty(ref _cc, value); }
         }
 
         private string _body;
-
         public string Body
         {
             get { return _body; }
@@ -45,7 +42,6 @@ namespace Outlook.Business
         }
 
         private DateTime _dataSent;
-
         public DateTime DataSent
         {
             get { return _dataSent; }

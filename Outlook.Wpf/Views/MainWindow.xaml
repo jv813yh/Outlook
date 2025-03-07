@@ -9,8 +9,8 @@
         xmlns:core="clr-namespace:Outlook.Core;assembly=Outlook.Core"
         mc:Ignorable="d"
         Title="MainWindow" 
-        Height="350" 
-        Width="525"
+        Height="720" 
+        Width="1080"
         prism:ViewModelLocator.AutoWireViewModel="True">
 
     <igWpf:XamRibbonWindow.Resources>
@@ -30,14 +30,14 @@
             <igWpf:XamOutlookBar 
                 prism:RegionManager.RegionName="{x:Static core:RegionNames.OutlookBarRegion}"
                 DockPanel.Dock="Left"
-                Width="200"
-                SelectedGroupChanged="XamOutlookBar_OnSelectedGroupChanged">
-
+                SelectedGroupChanged="XamOutlookBar_OnSelectedGroupChanged"
+                Width="250">
             </igWpf:XamOutlookBar>
 
 
             <!-- The ContentControl is where the views will be injected by ContentRegion with Prism -->
-            <ContentControl prism:RegionManager.RegionName="{x:Static core:RegionNames.ContentRegion}"/>
+            <ContentControl prism:RegionManager.RegionName="{x:Static core:RegionNames.ContentRegion}"
+                            />
 
             <!-- 
             

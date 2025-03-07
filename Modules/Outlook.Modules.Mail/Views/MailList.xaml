@@ -3,25 +3,56 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"             
              xmlns:igWpf="http://schemas.infragistics.com/xaml/wpf"
+             xmlns:business="clr-namespace:Outlook.Business;assembly=Outlook.Business"
              prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <!-- Mail List dataGrid -->
-        <igWpf:XamDataGrid Grid.Column="0">
+        <Grid Grid.Column="0"
+              Margin="5"
+              Background="White">
 
-        </igWpf:XamDataGrid>
+            <igWpf:XamDataGrid DataSource="{Binding MailMessages}"
+                               ActiveDataItem="{Binding SelectedMailMessage}">
 
+                <igWpf:XamDataGrid.FieldSettings>
+                    <igWpf:FieldSettings AllowEdit="False"/>
+                </igWpf:XamDataGrid.FieldSettings>
 
-        <!-- Form of selected mail -->
-        <Grid
-            Background="LightBlue"
-            Grid.Column="1"
-            MinWidth="250">
+                <igWpf:XamDataGrid.FieldLayoutSettings>
+                    <igWpf:FieldLayoutSettings AutoGenerateFields="False"/>
+                </igWpf:XamDataGrid.FieldLayoutSettings>
+
+                <igWpf:XamDataGrid.FieldLayouts>
+                    <igWpf:FieldLayout>
+                        <igWpf:TextField Name="From"/>
+                        <igWpf:TextField Name="Subject"/>
+                        <igWpf:DateTimeField Name="DataSent"/>
+                    </igWpf:FieldLayout>
+                </igWpf:XamDataGrid.FieldLayouts>
+
+            </igWpf:XamDataGrid>
         </Grid>
-            
+
+
+        <!--Form of selected mail-->
+        <Border Grid.Column="1"
+                Background="White"
+                Margin="5">
+
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="{Binding SelectedMailMessage.From}"/>
+                <TextBlock Text="{Binding SelectedMailMessage.To}"/>
+                <TextBlock Text="{Binding SelectedMailMessage.CC}"/>
+                <TextBlock Text="{Binding SelectedMailMessage.Subject}"/>
+                <TextBlock Text="{Binding SelectedMailMessage.Body}"/>
+
+            </StackPanel>
+        </Border>
+
     </Grid>
 </UserControl>

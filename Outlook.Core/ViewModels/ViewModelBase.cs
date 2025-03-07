@@ -22,7 +22,7 @@ namespace Outlook.Core.ViewModels
             continuationCallback(true);
         }
 
-        // Default true, object can be created 
+        // Reuse view instance by default
         public virtual bool IsNavigationTarget(NavigationContext navigationContext)
          => true;
 
