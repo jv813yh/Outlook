@@ -1,11 +1,10 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows;
-using System.Windows.Input;
-using Outlook.Business;
+﻿using Outlook.Business;
 using Outlook.Core.ViewModels;
 using Outlook.Services.Interfaces.MailInterfaces;
 using Prism.Commands;
 using Prism.Regions;
+using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace Outlook.Modules.Mail.ViewModels
 {

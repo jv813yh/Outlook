@@ -3,8 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"             
              xmlns:igWpf="http://schemas.infragistics.com/xaml/wpf"
-             xmlns:business="clr-namespace:Outlook.Business;assembly=Outlook.Business"
+             xmlns:ig="http://schemas.infragistics.com/xaml"
+             xmlns:converters="clr-namespace:Outlook.Modules.Mail.Converters"
              prism:ViewModelLocator.AutoWireViewModel="True">
+
+    <UserControl.Resources>
+        <converters:MailAddressConverter x:Key="MailAddressConverter"/>
+    </UserControl.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -24,14 +30,24 @@
                 </igWpf:XamDataGrid.FieldSettings>
 
                 <igWpf:XamDataGrid.FieldLayoutSettings>
-                    <igWpf:FieldLayoutSettings AutoGenerateFields="False"/>
+                    <igWpf:FieldLayoutSettings AutoGenerateFields="False"
+                                               SelectionTypeCell="None"
+                                               SelectionTypeRecord="Single"
+                                               AutoFitMode="OnlyWithVisibleStarFields"/>
                 </igWpf:XamDataGrid.FieldLayoutSettings>
 
                 <igWpf:XamDataGrid.FieldLayouts>
                     <igWpf:FieldLayout>
-                        <igWpf:TextField Name="From"/>
-                        <igWpf:TextField Name="Subject"/>
-                        <igWpf:DateTimeField Name="DataSent"/>
+                        <!--<igWpf:FieldLayout.SortedFields>
+                            <igWpf:FieldSortDescription FieldName="DateSent" Direction="Descending" IsGroupBy="True"/>
+                        </igWpf:FieldLayout.SortedFields>-->
+
+                        <igWpf:TextField Name="From"
+                                         Width="*"/>
+                        <igWpf:TextField Name="Subject"
+                                         Width="*"/>
+                        <igWpf:DateTimeField Name="DataSent"
+                                             Width="*"/>
                     </igWpf:FieldLayout>
                 </igWpf:XamDataGrid.FieldLayouts>
 
@@ -39,19 +55,117 @@
         </Grid>
 
 
-        <!--Form of selected mail-->
+        <!--Form of selected mail -->
         <Border Grid.Column="1"
                 Background="White"
                 Margin="5">
 
-            <StackPanel Orientation="Vertical">
-                <TextBlock Text="{Binding SelectedMailMessage.From}"/>
-                <TextBlock Text="{Binding SelectedMailMessage.To}"/>
-                <TextBlock Text="{Binding SelectedMailMessage.CC}"/>
-                <TextBlock Text="{Binding SelectedMailMessage.Subject}"/>
-                <TextBlock Text="{Binding SelectedMailMessage.Body}"/>
+            <Grid Margin="5" Name="MessagePreviewArea">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
-            </StackPanel>
+                <Grid Margin="10,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="85"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="10"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Column="0" 
+                            Grid.Row="0" 
+                            Grid.RowSpan="7" 
+                            Width="85" 
+                            Height="85" 
+                            BorderBrush="Black" 
+                            BorderThickness="0.4" 
+                            VerticalAlignment="Top">
+                        <Grid>
+                            <Image Source="/Outlook.Modules.Mail;component/Images/user.png" 
+                                   Stretch="UniformToFill"
+                                   Margin="3"/>
+                        </Grid>
+                    </Border>
+
+                    <TextBlock Grid.Column="1"
+                               Grid.Row="0" 
+                               Text="{Binding SelectedMailMessage.DataSent, StringFormat={}{0:ddd MM/dd/yyyy hh:mm tt}}" 
+                               Margin="10,0,0,0" />
+
+                    <TextBlock Grid.Column="1" 
+                               Grid.Row="2" 
+                               Text="{Binding SelectedMailMessage.Subject}" 
+                               FontSize="16" 
+                               Margin="10,0,0,0" />
+
+                    <TextBlock Grid.Column="0" 
+                               Grid.Row="3" 
+                               Text="To:" 
+                               HorizontalAlignment="Left" 
+                               VerticalAlignment="Bottom"/>
+
+                    <TextBlock Grid.Column="0" 
+                               Grid.Row="4" 
+                               Text="Cc:"  
+                               HorizontalAlignment="Left" 
+                               Height="25" 
+                               Padding="0,7,0,0" />
+
+                    <TextBlock Grid.Column="0" 
+                               Grid.Row="3" 
+                               Grid.ColumnSpan="2" 
+                               Text="{Binding SelectedMailMessage.To, Converter={StaticResource MailAddressConverter}}" 
+                               VerticalAlignment="Bottom" 
+                               Margin="25,0,0,0" />
+
+                    <TextBlock Grid.Column="0" 
+                               Grid.Row="4" 
+                               Grid.ColumnSpan="2" 
+                               Text="{Binding SelectedMailMessage.CC}" 
+                               Padding="0,7,0,0" 
+                               Height="25" 
+                               Margin="25,0,0,0" />
+
+                    <Border Grid.Row="6" 
+                            Grid.Column="0" 
+                            Grid.ColumnSpan="2" 
+                            BorderBrush="#FFD4D4D4"  
+                            BorderThickness="2" 
+                            Height="1" 
+                            VerticalAlignment="Center"/>
+                </Grid>
+
+
+                <!--- 
+                                                Email Body 
+                
+                        RTF is a way to preserve text with formatting and ensure 
+                        that that text appears the same in different programs.
+                
+                        We use the RtfDocumentAdapter to bind the RichTextEditor to the
+                        SelectedMailMessage.Body property and convert the RTF text to 
+                        a format that the RichTextEditor can display.
+                -->
+                <ig:RtfDocumentAdapter Grid.Row="1"
+                                       Document="{Binding Document, ElementName=RichTextEditor}"
+                                       Value="{Binding SelectedMailMessage.Body}"/>
+                <ig:XamRichTextEditor x:Name="RichTextEditor"
+                                      Margin="10,5,0,10"
+                                      Grid.Row="1"
+                                      IsReadOnly="True"
+                                      AllowDocumentViewSplitting="False">
+
+                </ig:XamRichTextEditor>
+            </Grid>
         </Border>
 
     </Grid>

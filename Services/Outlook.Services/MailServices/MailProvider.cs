@@ -22,7 +22,7 @@ namespace Outlook.Services.MailServices
                     "jane@doey.com",
                     "peter@doey.com"
                 },
-                Body = "Random String Generator is easy to use tool to generate unique String based on given parameters.",
+                Body = _rtfBodyRandomTest,
                 DataSent = DateTime.Now
             },
             new MailMessage()
@@ -35,8 +35,7 @@ namespace Outlook.Services.MailServices
                     "jonas@doey.com",
                     "jacob@doey.com"
                 },
-                Body = "You can use scala.util.Random to generate random characters, eg using nextPrintableChar. " +
-                       "Combine it with an iterator, to generate a sequence of them and filter",
+                Body = _rtfBodyWeatherTest,
                 DataSent = DateTime.Now.AddDays(-1)
             },
             new MailMessage()
@@ -49,8 +48,7 @@ namespace Outlook.Services.MailServices
                     "sebastian@doey.com",
                     "joerg@doey.com"
                 },
-                Body = "Hello, i was trying to generate a random string. " +
-                       "Looking for something similar on google, i find this one way: Random.seed!",
+                Body = _rtfBodyCookingTest,
                 DataSent = DateTime.Now.AddDays(-2)
             },
             new MailMessage()
@@ -63,8 +61,7 @@ namespace Outlook.Services.MailServices
                     "tina@doey.com",
                     "sabrina@doey.com"
                 },
-                Body = "Generates a random string of given length from characters specified in second argument. " +
-                       "Supports intervals, such as 0-9 or A-Z .",
+                Body = _rtfBodySportsUpdateTest,
                 DataSent = DateTime.Now.AddDays(-3)
             },
             new MailMessage()
@@ -77,21 +74,53 @@ namespace Outlook.Services.MailServices
                     "roland@doey.com",
                     "vladimir@doey.com"
                 },
-                Body = "Number Picker Wheel is a specialized random number generator, " +
-                       "rng tool which picks a random number differently by spinning a wheel. Free and easy to use.",
+                Body = _rtfBodyItNewsTest,
                 DataSent = DateTime.Now.AddDays(-4)
             },
 
         };
 
+
+        const string _rtfBodyRandomTest = "{\\rtf1\\ansi\\deff0\n{\\fonttbl{\\f0 Arial;}}\n{\\colortbl;\\red0\\green0\\blue0;\\red255\\green0\\blue0;}\n\\paperw11906\\" +
+                                        "paperh16838\\margl1440\\margr1440\\margt1440\\margb1440\n\n\\pard\\qc\\b\\f0\\fs28 Sample Email Subject\\par\n\\b0\\fs20\n\\" +
+                                        "pard\\sa200\nFrom: sender@example.com\\par\nTo: receiver@example.com\\par\nDate: March 4, 2025\\par\nSubject: Sample Email for " +
+                                        "Testing\\par\n\\par\nHello,\\par\n\\par\nThis is a sample email in \\b RTF \\b0 format for testing purposes. \\par\nYou can use " +
+                                        "this text to verify that your application properly displays and handles rich text content.\\par\n\\par\nBest regards,\\par\nSender Name\\par\n}";
+
+        const string _rtfBodyWeatherTest = "{\\rtf1\\ansi\\deff0\r\n{\\fonttbl{\\f0 Arial;}}\r\n{\\colortbl;\\red0\\green0\\blue0;\\red0\\green0\\blue255;}\r\n\\paperw11906\\" +
+                                                   "paperh16838\\margl1440\\margr1440\\margt1440\\margb1440\r\n\\pard\\qc\\b\\f0\\fs28 Weather Update: Sunny Days Ahead\\par\r\n\\b0\\fs20" +
+                                                   "\r\n\\pard\\sa200\r\nFrom: weatherdesk@example.com\\par\r\nTo: subscriber@example.com\\par\r\nDate: March 4, 2025\\par\r\nSubject: " +
+                                                   "Weekly Weather Forecast\\par\r\n\\par\r\nHello,\\par\r\n\\par\r\nThe forecast for this week looks bright and sunny! Expect clear skies," +
+                                                   " warm temperatures, and a gentle breeze throughout the week. Enjoy the pleasant weather and plan some outdoor activities.\\par\r\n\\par" +
+                                                   "\r\nBest regards,\\par\r\nWeather Desk\\par\r\n}\r\n";
+
+        const string _rtfBodyCookingTest = "{\\rtf1\\ansi\\deff0\r\n{\\fonttbl{\\f0 Arial;}}\r\n{\\colortbl;\\red0\\green0\\blue0;\\red255\\green0\\blue0;}\r\n\\paperw11906\\" +
+                                                   "paperh16838\\margl1440\\margr1440\\margt1440\\margb1440\r\n\\pard\\qc\\b\\f0\\fs28 New Recipe: Delicious Pasta\\par\r\n\\b0\\fs20\r\n\\" +
+                                                   "pard\\sa200\r\nFrom: chef@example.com\\par\r\nTo: foodie@example.com\\par\r\nDate: March 4, 2025\\par\r\nSubject: Recipe for a Delicious " +
+                                                   "Pasta Dish\\par\r\n\\par\r\nHello,\\par\r\n\\par\r\nToday, I'm excited to share my latest recipe for a delightful pasta dish. Fresh tomatoes," +
+                                                   " basil, and garlic are combined to create a rich, flavorful sauce that pairs perfectly with your favorite pasta. Don't forget a sprinkle of " +
+                                                   "parmesan cheese for that extra touch of goodness!\\par\r\n\\par\r\nHappy cooking,\\par\r\nChef Gourmet\\par\r\n}\r\n";
+
+        const string _rtfBodySportsUpdateTest = "{\\rtf1\\ansi\\deff0\r\n{\\fonttbl{\\f0 Arial;}}\r\n{\\colortbl;\\red0\\green0\\blue0;\\red0\\green128\\blue0;}\r\n\\paperw11906\\paperh16838" +
+                                                "\\margl1440\\margr1440\\margt1440\\margb1440\r\n\\pard\\qc\\b\\f0\\fs28 Sports Update: Local Team Triumphs\\par\r\n\\b0\\fs20\r\n\\pard\\sa200" +
+                                                "\r\nFrom: sportsnews@example.com\\par\r\nTo: fan@example.com\\par\r\nDate: March 4, 2025\\par\r\nSubject: Exciting Victory in Last Night's Game" +
+                                                "\\par\r\n\\par\r\nHello,\\par\r\n\\par\r\nGreat news from the sports arena! Our local team secured an impressive victory last night in a " +
+                                                "thrilling match. The players demonstrated exceptional teamwork and skill, thrilling fans across the city. Stay tuned for more detailed analysis " +
+                                                "and upcoming game schedules.\\par\r\n\\par\r\nGo Team!\\par\r\nSports News Team\\par\r\n}\r\n";
+
+        const string _rtfBodyItNewsTest = "{\\rtf1\\ansi\\deff0\r\n{\\fonttbl{\\f0 Arial;}}\r\n{\\colortbl;\\red0\\green0\\blue0;\\red128\\green0\\blue128;}\r\n\\paperw11906\\paperh16838" +
+                                          "\\margl1440\\margr1440\\margt1440\\margb1440\r\n\\pard\\qc\\b\\f0\\fs28 IT News: Innovations in Tech\\par\r\n\\b0\\fs20\r\n\\pard\\sa200\r\nFrom:" +
+                                          " techupdates@example.com\\par\r\nTo: itprofessional@example.com\\par\r\nDate: March 4, 2025\\par\r\nSubject: Breaking Tech Innovations and Trends" +
+                                          "\\par\r\n\\par\r\nHello,\\par\r\n\\par\r\nIn today's IT news, several groundbreaking innovations have been announced by leading tech companies. " +
+                                          "These advancements promise to revolutionize cloud computing, artificial intelligence, and cybersecurity. Stay tuned for in-depth articles and " +
+                                          "expert insights on these exciting developments.\\par\r\n\\par\r\nBest regards,\\par\r\nTech Updates Team\\par\r\n}\r\n";
+        #endregion
+
+        #region IMailService implementation
+
         private static List<MailMessage> _deletedMessages = new List<MailMessage>();
 
         private static List<MailMessage> _sentMessages = new List<MailMessage>();
-
-#endregion
-
-#region IMailService implementation
-
 
         /// <summary>
         /// 

@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\user.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Models\" />
   </ItemGroup>
 
@@ -16,6 +20,8 @@
     <PackageReference Include="Infragistics.WPF.DataTree.Trial" Version="24.2.53" />
     <PackageReference Include="Infragistics.WPF.OutlookBar.Trial" Version="24.2.53" />
     <PackageReference Include="Infragistics.WPF.Ribbon.Trial" Version="24.2.53" />
+    <PackageReference Include="Infragistics.WPF.RichTextDocument.Rtf.Trial" Version="24.2.53" />
+    <PackageReference Include="Infragistics.WPF.RichTextEditor.Trial" Version="24.2.53" />
     <PackageReference Include="Infragistics.WPF.Themes.Office2013.Trial" Version="24.2.53" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
     <PackageReference Include="Prism.Core" Version="8.0.0.1909" />
@@ -28,6 +34,12 @@
     <ProjectReference Include="..\..\Outlook.Core\Outlook.Core.csproj" />
     <ProjectReference Include="..\..\Services\Interfaces\Outlook.Services.Interfaces\Outlook.Services.Interfaces.csproj" />
     <ProjectReference Include="..\..\Services\Outlook.Services\Outlook.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\user.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

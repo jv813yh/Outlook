@@ -11,9 +11,16 @@
                        Header="Mail"
                        prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid>
+
+        <!-- 
+            dependency properties with binding
         
+            property paths without binding, 
+            these paths are static and are for mapping purposes only
+        -->
+
         <ig:XamDataTree x:Name="DataTree"
-            ItemsSource="{Binding Items}">
+                        ItemsSource="{Binding Items}">
 
             <i:Interaction.Triggers>
                 <i:EventTrigger  EventName="ActiveNodeChanged">
@@ -24,9 +31,13 @@
             </i:Interaction.Triggers>
 
             <ig:XamDataTree.GlobalNodeLayouts>
+
+                <!--- 
+                    NodeLayout serves as a template for visually displaying nodes in a tree
+                -->
                 <ig:NodeLayout Key="GlobalLayout"
                                DisplayMemberPath="Caption"
-                               TargetTypeName="NavigationItem"
+                               TargetTypeName="NavigationItem" 
                                IsExpandedMemberPath="IsExpanded"/>
             </ig:XamDataTree.GlobalNodeLayouts>
         </ig:XamDataTree>
