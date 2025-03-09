@@ -13,6 +13,8 @@ using Prism.Mvvm;
 using Prism.Regions;
 using Prism.Unity;
 using System.Windows;
+using Outlook.Wpf.Core.Dialogs;
+using Prism.Services.Dialogs;
 
 namespace Outlook.Wpf;
 
@@ -23,11 +25,26 @@ public partial class App : PrismApplication
 {
     protected override void RegisterTypes(IContainerRegistry containerRegistry)
     {
+        // Register IApplicationCommands as a singleton for ApplicationCommands
         containerRegistry.RegisterSingleton<IApplicationCommands, ApplicationCommands>();
+
+        // All dialogs opened via IDialogService will automatically
+        // use RibbonWindow as the base window
+        containerRegistry.RegisterDialogWindow<RibbonWindow>();
+
+        // containerRegistry.RegisterDialogWindow<CustomDialogWindow>("CustomDialog");
+        // _dialogService.ShowDialog("MyDialogView", new DialogParameters(), result => { }, "CustomDialog");
+
+        // I use custom dialog service for the WPF application isnteaf of the default Prism dialog service
+        containerRegistry.RegisterSingleton<IDialogService, MyDialogService>();
 
         ViewModelLocationProvider.Register<MainWindow, MainWindowViewModel>();
     }
 
+    /// <summary>
+    /// Create the shell window for the WPF application
+    /// </summary>
+    /// <returns></returns>
     protected override Window CreateShell()
      => Container.Resolve<MainWindow>();
 

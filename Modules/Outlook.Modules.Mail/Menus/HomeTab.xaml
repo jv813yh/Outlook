@@ -15,7 +15,7 @@
             <!-- Defines button in ribbon group New
                  with text Button and shows image and text together -->
             <ig:ButtonTool Caption="Button"
-                           Command="{Binding TestCommand}"
+                           Command="{Binding MessageCommand}"
                            ig:RibbonGroup.MaximumSize="ImageAndTextLarge"/>
 
 

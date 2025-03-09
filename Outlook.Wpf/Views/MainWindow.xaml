@@ -11,7 +11,16 @@
         Title="MainWindow" 
         Height="720" 
         Width="1080"
+        Icon="/Images/outlook.png"
         prism:ViewModelLocator.AutoWireViewModel="True">
+
+    <!-- 
+            XamRibbonWindow:
+            If you want a modern interface similar to Microsoft Office.
+            If your application has many commands and you want to organize them logically.
+            If you want a consistent design for both the main window and dialogs.
+            If you want a full-fledged WPF window, but with better visual options.
+    -->
 
     <igWpf:XamRibbonWindow.Resources>
         <BooleanToVisibilityConverter x:Key="ErrorMessageBooleanToVisibilityConverter"/>

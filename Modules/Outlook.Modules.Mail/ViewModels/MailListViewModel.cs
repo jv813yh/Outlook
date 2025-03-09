@@ -5,6 +5,8 @@ using Prism.Commands;
 using Prism.Regions;
 using System.Collections.ObjectModel;
 using System.Windows;
+using Outlook.Modules.Mail.Views;
+using Prism.Services.Dialogs;
 
 namespace Outlook.Modules.Mail.ViewModels
 {
@@ -12,6 +14,9 @@ namespace Outlook.Modules.Mail.ViewModels
     {
         // Service to work with mail messages
         private readonly IMailService _mailService;
+
+        // Service to work with dialogs
+        private readonly IDialogService _dialogService;
 
 
         private string _title = "Default";
@@ -37,20 +42,21 @@ namespace Outlook.Modules.Mail.ViewModels
             set { SetProperty(ref _mailMessages, value); }
         }
 
-        private DelegateCommand _testCommand;
-        public DelegateCommand TestCommand =>
-            _testCommand ?? (_testCommand = new DelegateCommand(ExecuteTestCommand));
+        private DelegateCommand _messageCommand;
+        public DelegateCommand MessageCommand =>
+            _messageCommand ?? (_messageCommand = new DelegateCommand(ExecuteMessageCommand));
 
-        private void ExecuteTestCommand()
+        private void ExecuteMessageCommand()
         {
             // TODO
-            MessageBox.Show("Test Command", "Test",
-                MessageBoxButton.OK, MessageBoxImage.Information);
+            _dialogService.Show(nameof(MessageDialogView));
         }
 
-        public MailListViewModel(IMailService mailService)
+        public MailListViewModel(IMailService mailService, 
+                                 IDialogService dialogService)
         {
             _mailService = mailService;
+            _dialogService = dialogService;
         }
 
         public override void OnNavigatedTo(NavigationContext navigationContext)

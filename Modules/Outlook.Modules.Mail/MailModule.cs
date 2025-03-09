@@ -30,6 +30,9 @@ namespace Outlook.Modules.Mail
 
             // Register the views with the container for navigation
             containerRegistry.RegisterForNavigation<MailList, MailListViewModel>();
+
+            // Register the dialog with the container
+            containerRegistry.RegisterDialog<MessageDialogView, MessageDialogViewModel>();
         }
 
         public void OnInitialized(IContainerProvider containerProvider)

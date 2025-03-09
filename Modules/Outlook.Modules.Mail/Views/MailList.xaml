@@ -162,9 +162,7 @@
                                       Margin="10,5,0,10"
                                       Grid.Row="1"
                                       IsReadOnly="True"
-                                      AllowDocumentViewSplitting="False">
-
-                </ig:XamRichTextEditor>
+                                      AllowDocumentViewSplitting="False"/>
             </Grid>
         </Border>
 
