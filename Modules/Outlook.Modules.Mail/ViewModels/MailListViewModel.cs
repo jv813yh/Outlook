@@ -1,12 +1,12 @@
 ﻿using Outlook.Business;
 using Outlook.Core.ViewModels;
+using Outlook.Modules.Mail.Views;
 using Outlook.Services.Interfaces.MailInterfaces;
 using Prism.Commands;
 using Prism.Regions;
+using Prism.Services.Dialogs;
 using System.Collections.ObjectModel;
 using System.Windows;
-using Outlook.Modules.Mail.Views;
-using Prism.Services.Dialogs;
 
 namespace Outlook.Modules.Mail.ViewModels
 {
@@ -46,6 +46,7 @@ namespace Outlook.Modules.Mail.ViewModels
         public DelegateCommand MessageCommand =>
             _messageCommand ?? (_messageCommand = new DelegateCommand(ExecuteMessageCommand));
 
+        // show UI dialog for writing, sending emails
         private void ExecuteMessageCommand()
         {
             // TODO
@@ -61,6 +62,7 @@ namespace Outlook.Modules.Mail.ViewModels
 
         public override void OnNavigatedTo(NavigationContext navigationContext)
         {
+            // according the key we can get value
             var folder = navigationContext.Parameters.GetValue<string>(FolderParameters.FolderKey);
 
             switch (folder)

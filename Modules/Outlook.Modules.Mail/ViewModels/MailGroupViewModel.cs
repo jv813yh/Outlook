@@ -3,7 +3,6 @@ using Outlook.Core.Interfaces;
 using Outlook.Core.ViewModels;
 using Prism.Commands;
 using System.Collections.ObjectModel;
-using Prism;
 
 namespace Outlook.Modules.Mail.ViewModels
 {

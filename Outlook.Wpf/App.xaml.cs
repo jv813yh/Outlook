@@ -5,16 +5,17 @@ using Outlook.Core.Interfaces;
 using Outlook.Modules.Calendar;
 using Outlook.Modules.Contacts;
 using Outlook.Modules.Mail;
+using Outlook.Wpf.Core.Dialogs;
 using Outlook.Wpf.Core.Regions;
 using Outlook.Wpf.ViewModels;
+using Outlook.Wpf.Views;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Mvvm;
 using Prism.Regions;
+using Prism.Services.Dialogs;
 using Prism.Unity;
 using System.Windows;
-using Outlook.Wpf.Core.Dialogs;
-using Prism.Services.Dialogs;
 
 namespace Outlook.Wpf;
 

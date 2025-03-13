@@ -43,8 +43,6 @@ namespace Outlook.Wpf.Core.Regions
                             {
                                 regionTarget.SelectedGroup = group;
                             }
-
-                            var selected = regionTarget.SelectedGroup;
                         }
                     }
                 }

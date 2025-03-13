@@ -22,7 +22,7 @@ namespace Outlook.Modules.Mail
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            // if we want to implicitly register the view model with the view
+            // If we want to implicitly register the view model with the view
             ViewModelLocationProvider.Register<MailGroup, MailGroupViewModel>();
 
             // Register the mail service with the container

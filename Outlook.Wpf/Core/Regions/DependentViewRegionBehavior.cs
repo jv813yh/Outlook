@@ -79,7 +79,7 @@ namespace Outlook.Wpf.Core.Regions
                         _dependentViewCache.Add(view, dependentViews);
                     }
 
-                    // add dependent views to the region
+                    // add dependent views to the RibbonRegion region
                     foreach (var dependentView in dependentViews)
                     {
                         if (Region.RegionManager.Regions.ContainsRegionWithName(dependentView.Region))
@@ -147,7 +147,7 @@ namespace Outlook.Wpf.Core.Regions
         }
 
         /*
-         * Object
+         * Object in WPF:
              └─ DispatcherObject  -  threading, marshaling, and synchronization
                  └─ DependencyObject  -  data binding, resources, styles, templates
                      └─ Visual  -  rendering, hit testing, and input

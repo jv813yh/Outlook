@@ -22,5 +22,10 @@ namespace Outlook.Wpf.Core.Dialogs
         {
             (DialogWindow as RibbonWindow).Initialize(name, parametrs);
         }
+
+        //protected override void ConfigureDialogWindowContent(string dialogName, IDialogWindow window, IDialogParameters parameters)
+        //{
+
+        //}
     }
 }

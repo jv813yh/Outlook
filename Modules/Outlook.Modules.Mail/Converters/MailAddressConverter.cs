@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Windows.Data;
-using System.Windows.Navigation;
 
 namespace Outlook.Modules.Mail.Converters
 {

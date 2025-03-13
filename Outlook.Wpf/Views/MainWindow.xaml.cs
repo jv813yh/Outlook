@@ -2,10 +2,9 @@
 using Infragistics.Windows.OutlookBar;
 using Infragistics.Windows.Ribbon;
 using Outlook.Core.Interfaces;
-using Prism.Regions;
 using System.Windows;
 
-namespace Outlook.Wpf;
+namespace Outlook.Wpf.Views;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml
@@ -31,6 +30,7 @@ public partial class MainWindow : XamRibbonWindow
     /// <param name="e"></param>
     private void XamOutlookBar_OnSelectedGroupChanged(object sender, RoutedEventArgs e)
     {
+        var test = (sender as XamOutlookBar).SelectedGroup;
         var group = (sender as XamOutlookBar).SelectedGroup as IOutlookBarGroup;
         if (group != null)
         {
