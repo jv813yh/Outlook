@@ -31,13 +31,13 @@ public partial class App : PrismApplication
 
         // All dialogs opened via IDialogService will automatically
         // use RibbonWindow as the base window
-        containerRegistry.RegisterDialogWindow<RibbonWindow>();
+        //containerRegistry.RegisterDialogWindow<RibbonWindow>();
 
         // containerRegistry.RegisterDialogWindow<CustomDialogWindow>("CustomDialog");
         // _dialogService.ShowDialog("MyDialogView", new DialogParameters(), result => { }, "CustomDialog");
 
         // I use custom dialog service for the WPF application isnteaf of the default Prism dialog service
-        containerRegistry.RegisterSingleton<IDialogService, MyDialogService>();
+        containerRegistry.RegisterSingleton<IMyDialogService, MyDialogService>();
 
         ViewModelLocationProvider.Register<MainWindow, MainWindowViewModel>();
     }
