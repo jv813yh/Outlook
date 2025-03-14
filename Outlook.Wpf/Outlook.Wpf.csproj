@@ -32,10 +32,4 @@
     </Resource>
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Core\Dialogs\RibbonWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
-
 </Project>

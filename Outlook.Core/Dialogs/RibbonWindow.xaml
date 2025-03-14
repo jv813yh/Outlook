@@ -1,19 +1,23 @@
-﻿<igWpf:XamRibbonWindow x:Class="Outlook.Wpf.Core.Dialogs.RibbonWindow"
+﻿<igWpf:XamRibbonWindow x:Class="Outlook.Core.Dialogs.RibbonWindow"
        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
        xmlns:igWpf="http://schemas.infragistics.com/xaml/wpf"
        xmlns:prism="http://prismlibrary.com/"
-       WindowStartupLocation="CenterScreen"
-       xmlns:core="clr-namespace:Outlook.Core;assembly=Outlook.Core">
+       xmlns:local="clr-namespace:Outlook.Core.Dialogs"
+       xmlns:core="clr-namespace:Outlook.Core"
+       mc:Ignorable="d"
+       Title="RibbonWindow" 
+       Height="450"
+       Width="800">
 
     <igWpf:RibbonWindowContentHost>
         <igWpf:RibbonWindowContentHost.Ribbon>
+
             <igWpf:XamRibbon prism:RegionManager.RegionName="{x:Static core:RegionNames.RibbonRegion}"/>
         </igWpf:RibbonWindowContentHost.Ribbon>
 
         <ContentControl prism:RegionManager.RegionName="{x:Static core:RegionNames.ContentRegion}"/>
-
     </igWpf:RibbonWindowContentHost>
 </igWpf:XamRibbonWindow>

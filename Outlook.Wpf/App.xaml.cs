@@ -5,7 +5,6 @@ using Outlook.Core.Interfaces;
 using Outlook.Modules.Calendar;
 using Outlook.Modules.Contacts;
 using Outlook.Modules.Mail;
-using Outlook.Wpf.Core.Dialogs;
 using Outlook.Wpf.Core.Regions;
 using Outlook.Wpf.ViewModels;
 using Outlook.Wpf.Views;
@@ -13,7 +12,6 @@ using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Mvvm;
 using Prism.Regions;
-using Prism.Services.Dialogs;
 using Prism.Unity;
 using System.Windows;
 
@@ -37,7 +35,7 @@ public partial class App : PrismApplication
         // _dialogService.ShowDialog("MyDialogView", new DialogParameters(), result => { }, "CustomDialog");
 
         // I use custom dialog service for the WPF application isnteaf of the default Prism dialog service
-        containerRegistry.RegisterSingleton<IMyDialogService, MyDialogService>();
+        //containerRegistry.RegisterSingleton<IMyDialogService, MyDialogService>();
 
         ViewModelLocationProvider.Register<MainWindow, MainWindowViewModel>();
     }

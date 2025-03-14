@@ -1,9 +1,11 @@
 ﻿using System.Net.Mime;
 using System.Windows;
 using Outlook.Core;
+using Outlook.Core.Dialogs;
 using Outlook.Core.Interfaces;
 using Prism.Ioc;
 using Prism.Regions;
+using Prism.Services.Dialogs;
 
 namespace Outlook.Wpf.Core.Dialogs
 {

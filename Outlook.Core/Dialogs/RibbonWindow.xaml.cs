@@ -1,10 +1,8 @@
-﻿using Infragistics.Themes;
+﻿using System.Windows;
+using Infragistics.Themes;
 using Infragistics.Windows.Ribbon;
-using Outlook.Core;
-using Prism.Regions;
-using Prism.Services.Dialogs;
 
-namespace Outlook.Wpf.Core.Dialogs
+namespace Outlook.Core.Dialogs
 {
     /// <summary>
     /// Interaction logic for RibbonWindow.xaml
@@ -14,8 +12,7 @@ namespace Outlook.Wpf.Core.Dialogs
         public RibbonWindow()
         {
             InitializeComponent();
-
-            ThemeManager.ApplicationTheme = new Office2013Theme();
+            //ThemeManager.ApplicationTheme = new Office2013Theme();
         }
     }
 }
