@@ -1,12 +1,11 @@
 ﻿using Outlook.Business;
-using Outlook.Core.Dialogs;
+using Outlook.Core.Interfaces;
 using Outlook.Core.ViewModels;
+using Outlook.Modules.Mail.Views;
 using Outlook.Services.Interfaces.MailInterfaces;
 using Prism.Commands;
 using Prism.Regions;
-using Prism.Services.Dialogs;
 using System.Collections.ObjectModel;
-using Outlook.Modules.Mail.Views;
 
 namespace Outlook.Modules.Mail.ViewModels
 {
@@ -16,7 +15,7 @@ namespace Outlook.Modules.Mail.ViewModels
         private readonly IMailService _mailService;
 
         // Service to work with dialogs
-        private readonly IDialogService _dialogService;
+        private readonly IRegionDialogService _dialogService;
 
 
         private string _title = "Default";
@@ -50,11 +49,11 @@ namespace Outlook.Modules.Mail.ViewModels
         private void ExecuteMessageCommand()
         {
             // TODO
-            _dialogService.ShowRibbonWindow(nameof(MessageDialogView));
+            _dialogService.ShowRegionDialog(nameof(MessageDialogView));
         }
 
         public MailListViewModel(IMailService mailService,
-            IDialogService dialogService)
+            IRegionDialogService dialogService)
         {
             _mailService = mailService;
             _dialogService = dialogService;

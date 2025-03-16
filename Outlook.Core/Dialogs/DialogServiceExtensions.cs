@@ -1,27 +1,21 @@
-﻿using Outlook.Core.Dialogs;
-using Prism.Regions;
-using Prism.Services.Dialogs;
-using System.Windows;
-using Outlook.Core.Interfaces;
-
-namespace Outlook.Core.Dialogs
+﻿namespace Outlook.Core.Dialogs
 {
     public static class DialogServiceExtensions
     {
-        public static void ShowRibbonWindow(this IDialogService dialogService, string name)
-        {
-            if (dialogService is IDialogService myDialogService)
-            {
-                var window = new RibbonWindow();
+        //public static void ShowRibbonWindow(this IDialogService dialogService, string name)
+        //{
+        //    if (dialogService is IDialogService myDialogService)
+        //    {
+        //        var window = new RibbonDialogWindow();
 
-                var newRegionManager = new RegionManager();
-                RegionManager.SetRegionManager(window, newRegionManager);
+        //        var newRegionManager = new RegionManager();
+        //        RegionManager.SetRegionManager(window, newRegionManager);
 
-                newRegionManager.RequestNavigate(RegionNames.ContentRegion, name);
+        //        newRegionManager.RequestNavigate(RegionNames.ContentRegion, name);
 
-                window.Owner = Application.Current.MainWindow;
-                window.Show();
-            }
-        }
+        //        window.Owner = Application.Current.MainWindow;
+        //        window.Show();
+        //    }
+        //}
     }
 }

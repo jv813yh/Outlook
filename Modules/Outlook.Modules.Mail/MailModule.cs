@@ -31,7 +31,7 @@ namespace Outlook.Modules.Mail
             // Register the views with the container for navigation
             containerRegistry.RegisterForNavigation<MailList, MailListViewModel>();
 
-            // Register the dialog with the container
+            // Register the dialog view and viewModel with the container
             containerRegistry.RegisterDialog<MessageDialogView, MessageDialogViewModel>();
         }
 

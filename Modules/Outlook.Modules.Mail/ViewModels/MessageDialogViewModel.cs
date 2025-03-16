@@ -1,4 +1,5 @@
-﻿using Prism.Mvvm;
+﻿using Prism.Commands;
+using Prism.Mvvm;
 using Prism.Services.Dialogs;
 
 namespace Outlook.Modules.Mail.ViewModels
@@ -7,10 +8,27 @@ namespace Outlook.Modules.Mail.ViewModels
     /// View model for dialog message
     /// </summary>
 	public class MessageDialogViewModel : BindableBase, IDialogAware
-	{
+    {
+        private DelegateCommand _messageCommand;
+        public DelegateCommand MessageCommand =>
+            _messageCommand ??= new DelegateCommand(ExecuteMessageCommand);
+
+        private string _input;
+        public string Input
+        {
+            get => _input;
+            set => SetProperty(ref _input, value);
+        }
+
         public MessageDialogViewModel()
         {
 
+        }
+
+        private void ExecuteMessageCommand()
+        {
+            // Todo: close dialog
+            RequestClose?.Invoke(new DialogResult());
         }
 
         public bool CanCloseDialog()

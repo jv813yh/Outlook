@@ -1,11 +1,16 @@
-﻿using System.Windows.Controls;
+﻿using Outlook.Core;
+using Outlook.Core.Attributes;
+using Outlook.Core.Interfaces;
+using Outlook.Modules.Mail.Menus;
+using System.Windows.Controls;
 
 namespace Outlook.Modules.Mail.Views
 {
     /// <summary>
     /// Interaction logic for MessageView
     /// </summary>
-    public partial class MessageDialogView : UserControl
+    [DependentView(RegionNames.RibbonRegion, typeof(HomeTab))]
+    public partial class MessageDialogView : UserControl, ISupportDataContext
     {
         public MessageDialogView()
         {
