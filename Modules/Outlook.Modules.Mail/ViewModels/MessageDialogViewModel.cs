@@ -44,7 +44,7 @@ namespace Outlook.Modules.Mail.ViewModels
 
         public string Title
         {
-            get => "Mail Message";
+            get => "Mail Message Test";
         }
 
         public event Action<IDialogResult>? RequestClose;

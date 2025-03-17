@@ -15,8 +15,8 @@
             <TextBox Text="{Binding Input, UpdateSourceTrigger=PropertyChanged,
                 Mode=TwoWay}"
                      FontSize="20"
-                     Height="150"
-                     Width="35"/>
+                     Height="30"
+                     Width="150"/>
 
 
         </StackPanel>

@@ -15,7 +15,8 @@
     <igWpf:RibbonWindowContentHost>
         <igWpf:RibbonWindowContentHost.Ribbon>
 
-            <igWpf:XamRibbon prism:RegionManager.RegionName="{x:Static core:RegionNames.RibbonRegion}"/>
+            <igWpf:XamRibbon x:Name="RibbonRegion"
+                prism:RegionManager.RegionName="{x:Static core:RegionNames.RibbonRegion}"/>
         </igWpf:RibbonWindowContentHost.Ribbon>
 
         <ContentControl x:Name="MainRegion"

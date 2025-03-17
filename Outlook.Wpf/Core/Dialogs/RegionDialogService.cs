@@ -1,11 +1,12 @@
 ﻿using Outlook.Core;
-using Outlook.Core.Dialogs;
 using Outlook.Core.Interfaces;
+using Outlook.Wpf.Core.Dialogs.Controls;
 using Prism.Ioc;
 using Prism.Regions;
-using System.Windows;
-using Outlook.Wpf.Core.Dialogs.Controls;
 using Prism.Services.Dialogs;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Windows;
 
 namespace Outlook.Wpf.Core.Dialogs
 {
@@ -36,33 +37,70 @@ namespace Outlook.Wpf.Core.Dialogs
 
             newRegionManager.RequestNavigate(RegionNames.ContentRegion, name);
 
-            Action<IDialogResult> requestCloseHandler = null;
-            requestCloseHandler = (r) =>
-            {
-                window.Close();
-            };
+            newRegionManager.Regions[RegionNames.ContentRegion].ActiveViews.CollectionChanged +=
+                OnActiveViewsCollectionChanged;
 
-            // RoutedEventHandler is a predefined delegate in WPF
-            // that is used to handle routed events (e.g. Loaded, Click).
+            CancelEventHandler closingHandler = null;
+            closingHandler = (o, e) =>
+            {
+
+                if (window.MainRegion.DataContext is IDialogAware da)
+                {
+                    if (!da.CanCloseDialog())
+                        e.Cancel = true;
+                }
+            };
+            window.Closing += closingHandler;
+
+            //// RoutedEventHandler is a predefined delegate in WPF
+            //// that is used to handle routed events (e.g. Loaded, Click).
             RoutedEventHandler loadedHandler = null;
             loadedHandler = (s, e) =>
             {
-                window.Loaded -= loadedHandler;
-                // The DataContext is a reference to the ViewModel,
-                // which handles the data and logic for the View.
-                IDialogAware da = window.DataContext as IDialogAware;
+                window.MainRegion.Loaded -= loadedHandler;
 
-                //da.RequestClose += requestCloseHandler;
-                if (da != null)
+                // Content is a reference to the View
+                if (window.MainRegion.Content is FrameworkElement view)
                 {
-                    da.RequestClose += requestCloseHandler;
+                    //window.DataContext = view.DataContext;
+                   // window.RibbonRegion.DataContext = view.DataContext;
+                   window.MainRegion.DataContext = view.DataContext;
+                }
+
+                // The DataContext is a reference to the ViewModel
+                if (window.MainRegion.DataContext is IDialogAware da)
+                {
+                    da.RequestClose += _ => window.Close();
                 }
             };
-            window.Loaded += loadedHandler;
+
+            window.MainRegion.Loaded += loadedHandler;
+
+
+            // To avoid memory leak
+            EventHandler closeHandler = null;
+            closeHandler = (s, e) =>
+            {
+                window.Closed -= closeHandler;
+                window.Closing -= closingHandler;
+
+                window.DataContext = null;
+                window.Content = null;
+                window.MainRegion.DataContext = null;
+
+                newRegionManager.Regions.ToList().ForEach(r => _regionManager.Regions.Remove(r.Name));
+            };
+
+            window.Closed += closeHandler;
 
             window.Owner = Application.Current.MainWindow;
             window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             window.Show();
+        }
+
+        private void OnActiveViewsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        {
+           
         }
     }
 }
