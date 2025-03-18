@@ -6,6 +6,7 @@ using Outlook.Services.Interfaces.MailInterfaces;
 using Prism.Commands;
 using Prism.Regions;
 using System.Collections.ObjectModel;
+using Outlook.Core;
 
 namespace Outlook.Modules.Mail.ViewModels
 {
@@ -49,7 +50,7 @@ namespace Outlook.Modules.Mail.ViewModels
         private void ExecuteMessageCommand()
         {
             // TODO
-            _dialogService.ShowRegionDialog(nameof(MessageDialogView));
+            _dialogService.ShowRegionDialog(RegionNames.ContentRegion, nameof(MessageDialogView));
         }
 
         public MailListViewModel(IMailService mailService,

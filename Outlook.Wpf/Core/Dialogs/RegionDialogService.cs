@@ -1,5 +1,4 @@
-﻿using Outlook.Core;
-using Outlook.Core.Interfaces;
+﻿using Outlook.Core.Interfaces;
 using Outlook.Wpf.Core.Dialogs.Controls;
 using Prism.Ioc;
 using Prism.Regions;
@@ -28,16 +27,23 @@ namespace Outlook.Wpf.Core.Dialogs
             _containerExtension = containerExtension;
         }
 
-        public void ShowRegionDialog(string name)
+        public void ShowRegionDialog(string regionName, string viewName)
         {
             var window = _containerExtension.Resolve<RibbonDialogWindow>();
 
             var newRegionManager = _regionManager.CreateRegionManager();
             RegionManager.SetRegionManager(window, newRegionManager);
 
-            newRegionManager.RequestNavigate(RegionNames.ContentRegion, name);
 
-            newRegionManager.Regions[RegionNames.ContentRegion].ActiveViews.CollectionChanged +=
+            //RegionManagerAware.SetRegionManagerAware(window, newRegionManager);
+
+            newRegionManager.RequestNavigate(regionName, viewName);
+
+            //IRegion region = newRegionManager.Regions[RegionNames.ContentRegion];
+            //var activeViews = region.ActiveViews.FirstOrDefault() as FrameworkElement;
+            //IDialogAware dialogAware = activeViews.DataContext as IDialogAware;
+
+            newRegionManager.Regions[regionName].ActiveViews.CollectionChanged +=
                 OnActiveViewsCollectionChanged;
 
             CancelEventHandler closingHandler = null;

@@ -2,6 +2,6 @@
 {
     public interface IRegionDialogService
     {
-        void ShowRegionDialog(string name);
+        void ShowRegionDialog(string regionName, string viewName);
     }
 }

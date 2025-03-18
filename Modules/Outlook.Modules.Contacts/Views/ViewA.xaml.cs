@@ -1,7 +1,7 @@
 ﻿using Outlook.Core.Attributes;
-using Outlook.Core;
 using System.Windows.Controls;
 using Outlook.Modules.Contacts.Menus;
+using Outlook.Core;
 
 namespace Outlook.Modules.Contacts.Views
 {

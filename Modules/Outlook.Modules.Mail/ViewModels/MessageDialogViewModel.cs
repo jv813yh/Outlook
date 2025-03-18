@@ -1,5 +1,7 @@
-﻿using Prism.Commands;
+﻿using Outlook.Core.Interfaces;
+using Prism.Commands;
 using Prism.Mvvm;
+using Prism.Regions;
 using Prism.Services.Dialogs;
 
 namespace Outlook.Modules.Mail.ViewModels
@@ -7,11 +9,13 @@ namespace Outlook.Modules.Mail.ViewModels
     /// <summary>
     /// View model for dialog message
     /// </summary>
-	public class MessageDialogViewModel : BindableBase, IDialogAware
+	public class MessageDialogViewModel : BindableBase, IDialogAware, IRegionManagerAware
     {
         private DelegateCommand _messageCommand;
         public DelegateCommand MessageCommand =>
             _messageCommand ??= new DelegateCommand(ExecuteMessageCommand);
+
+        public IRegionManager RegionManager { get; set; }
 
         private string _input;
         public string Input

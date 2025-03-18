@@ -87,6 +87,7 @@ public partial class App : PrismApplication
     {
         base.ConfigureDefaultRegionBehaviors(regionBehaviors);
         regionBehaviors.AddIfMissing(DependentViewRegionBehavior.BehaviorKey, typeof(DependentViewRegionBehavior));
+        regionBehaviors.AddIfMissing(RegionManagerAwareBehavior.BehaviorKey, typeof(RegionManagerAwareBehavior));
     }
 }
 
