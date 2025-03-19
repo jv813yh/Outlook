@@ -2,7 +2,6 @@
 using Outlook.Core.Interfaces;
 using Prism.Regions;
 using System.Collections.Specialized;
-using System.Linq.Expressions;
 using System.Windows;
 
 namespace Outlook.Wpf.Core.Regions
@@ -24,7 +23,7 @@ namespace Outlook.Wpf.Core.Regions
             {
                 foreach (var item in e.NewItems)
                 {
-                    InvokeOnRegionManagerAwareElement(item, x => x.RegionManager = Region.RegionManager);
+                    InvokeOnRegionManagerAwareElement(item, _ => _.RegionManager = Region.RegionManager);
                 }
             }
             else if (e.Action == NotifyCollectionChangedAction.Remove)

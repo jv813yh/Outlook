@@ -106,7 +106,18 @@ namespace Outlook.Wpf.Core.Dialogs
 
         private void OnActiveViewsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
-           
+            if(e.Action == NotifyCollectionChangedAction.Add)
+            {
+                foreach (var item in e.NewItems)
+                {
+                   IDialogAware dialogAware = ((FrameworkElement)item).DataContext as IDialogAware;
+                    if (dialogAware != null)
+                    {
+
+                        
+                    }
+                }
+            }
         }
     }
 }
