@@ -1,4 +1,7 @@
-﻿using Outlook.Core.Interfaces;
+﻿using System.Windows;
+using Outlook.Core;
+using Outlook.Core.Interfaces;
+using Outlook.Modules.Mail.Views;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
@@ -32,12 +35,21 @@ namespace Outlook.Modules.Mail.ViewModels
         private void ExecuteMessageCommand()
         {
             // Todo: close dialog
-            RequestClose?.Invoke(new DialogResult());
+            //RequestClose?.Invoke(new DialogResult());
+            if (RegionManager != null)
+            {
+                RegionManager.RequestNavigate(RegionNames.ContentRegion, nameof(MailList));
+            }
         }
 
         public bool CanCloseDialog()
-         => true;
+        {
+            MessageBoxResult result = MessageBox.Show("Do you really want to close window ?", "MessageDialog Window",
+                MessageBoxButton.YesNo, MessageBoxImage.Question);
 
+            return result == MessageBoxResult.OK ? true : false;
+        }
+        
         public void OnDialogClosed()
         {
         }
@@ -48,8 +60,9 @@ namespace Outlook.Modules.Mail.ViewModels
 
         public string Title
         {
-            get => "Mail Message Test";
+            get => "Message Dialog Test";
         }
+
 
         public event Action<IDialogResult>? RequestClose;
     }

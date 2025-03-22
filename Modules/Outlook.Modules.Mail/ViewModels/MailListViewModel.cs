@@ -6,11 +6,13 @@ using Outlook.Services.Interfaces.MailInterfaces;
 using Prism.Commands;
 using Prism.Regions;
 using System.Collections.ObjectModel;
+using System.Windows;
 using Outlook.Core;
+using Prism.Services.Dialogs;
 
 namespace Outlook.Modules.Mail.ViewModels
 {
-	public class MailListViewModel : ViewModelBase
+	public class MailListViewModel : ViewModelBase, IDialogAware, IRegionManagerAware
     {
         // Service to work with mail messages
         private readonly IMailService _mailService;
@@ -43,8 +45,13 @@ namespace Outlook.Modules.Mail.ViewModels
         }
 
         private DelegateCommand _messageCommand;
+
+        public event Action<IDialogResult>? RequestClose;
+
         public DelegateCommand MessageCommand =>
             _messageCommand ?? (_messageCommand = new DelegateCommand(ExecuteMessageCommand));
+
+        public IRegionManager RegionManager { get; set; }
 
         // show UI dialog for writing, sending emails
         private void ExecuteMessageCommand()
@@ -77,6 +84,22 @@ namespace Outlook.Modules.Mail.ViewModels
                     MailMessages = new ObservableCollection<MailMessage>(_mailService.GetDeletedMessages());
                     break;
             }
+        }
+
+        public bool CanCloseDialog()
+        {
+           MessageBoxResult result = MessageBox.Show("Do you really want to close window ?", "MailList Window",
+                MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+           return result == MessageBoxResult.OK ? true: false;
+        }
+
+        public void OnDialogClosed()
+        {
+        }
+
+        public void OnDialogOpened(IDialogParameters parameters)
+        {
         }
     }
 }

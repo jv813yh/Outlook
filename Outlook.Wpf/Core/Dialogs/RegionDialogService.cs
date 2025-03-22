@@ -1,4 +1,5 @@
-﻿using Outlook.Core.Interfaces;
+﻿using Outlook.Core;
+using Outlook.Core.Interfaces;
 using Outlook.Wpf.Core.Dialogs.Controls;
 using Prism.Ioc;
 using Prism.Regions;
@@ -6,6 +7,7 @@ using Prism.Services.Dialogs;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Windows;
+using Outlook.Modules.Mail.Views;
 
 namespace Outlook.Wpf.Core.Dialogs
 {
@@ -37,87 +39,158 @@ namespace Outlook.Wpf.Core.Dialogs
 
             //RegionManagerAware.SetRegionManagerAware(window, newRegionManager);
 
-            newRegionManager.RequestNavigate(regionName, viewName);
+            //newRegionManager.RequestNavigate(regionName, viewName);
 
             //IRegion region = newRegionManager.Regions[RegionNames.ContentRegion];
             //var activeViews = region.ActiveViews.FirstOrDefault() as FrameworkElement;
             //IDialogAware dialogAware = activeViews.DataContext as IDialogAware;
 
-            newRegionManager.Regions[regionName].ActiveViews.CollectionChanged +=
-                OnActiveViewsCollectionChanged;
-
             CancelEventHandler closingHandler = null;
-            closingHandler = (o, e) =>
-            {
 
-                if (window.MainRegion.DataContext is IDialogAware da)
+            newRegionManager.Regions[regionName].ActiveViews.CollectionChanged += (sender, e) =>
+            {
+                if (e.Action == NotifyCollectionChangedAction.Add)
                 {
-                    if (!da.CanCloseDialog())
-                        e.Cancel = true;
+                    foreach (var item in e.NewItems)
+                    {
+                        IDialogAware dialogAware = ((FrameworkElement)item).DataContext as IDialogAware;
+
+                        if (window != null)
+                        {
+
+                            Action<IDialogResult> requestCloseHandler = null;
+                            requestCloseHandler = (r) =>
+                            {
+                                window.Close();
+                            };
+
+                            closingHandler = (o, e) =>
+                            {
+
+                                if (dialogAware != null)
+                                {
+                                    if (!dialogAware.CanCloseDialog())
+                                        e.Cancel = true;
+                                }
+                            };
+                            window.Closing += closingHandler;
+
+                            //// RoutedEventHandler is a predefined delegate in WPF
+                            //// that is used to handle routed events (e.g. Loaded, Click).
+                            RoutedEventHandler loadedHandler = null;
+                            loadedHandler = (s, e) =>
+                            {
+                                window.MainRegion.Loaded -= loadedHandler;
+
+                                // Content is a reference to the View
+                                if (dialogAware != null)
+                                {
+                                    //window.DataContext = view.DataContext;
+                                    // window.RibbonRegion.DataContext = view.DataContext;
+                                    window.MainRegion.DataContext = dialogAware;
+                                }
+
+                                // The DataContext is a reference to the ViewModel
+                                if (dialogAware != null)
+                                {
+                                    dialogAware.RequestClose += requestCloseHandler;
+                                    //dialogAware.RequestClose += _ => window.Close();
+                                }
+                            };
+
+                            window.MainRegion.Loaded += loadedHandler;
+
+
+                            // To avoid memory leak
+                            EventHandler closeHandler = null;
+                            closeHandler = (s, e) =>
+                            {
+                                window.Closed -= closeHandler;
+                                window.Closing -= closingHandler;
+
+                                window.DataContext = null;
+                                window.Content = null;
+                                //window.MainRegion.DataContext = null;
+
+                                newRegionManager.Regions.ToList().ForEach(r => _regionManager.Regions.Remove(r.Name));
+                            };
+
+                            window.Closed += closeHandler;
+
+                        }
+                    }
+                }
+                else if (e.Action == NotifyCollectionChangedAction.Remove)
+                {
+                    foreach (var item in e.OldItems)
+                    {
+                        //IDialogAware dialogAware = ((FrameworkElement)item).DataContext as IDialogAware;
+                        //window.Closing -= closingHandler;
+                    }
                 }
             };
-            window.Closing += closingHandler;
-
-            //// RoutedEventHandler is a predefined delegate in WPF
-            //// that is used to handle routed events (e.g. Loaded, Click).
-            RoutedEventHandler loadedHandler = null;
-            loadedHandler = (s, e) =>
-            {
-                window.MainRegion.Loaded -= loadedHandler;
-
-                // Content is a reference to the View
-                if (window.MainRegion.Content is FrameworkElement view)
-                {
-                    //window.DataContext = view.DataContext;
-                   // window.RibbonRegion.DataContext = view.DataContext;
-                   window.MainRegion.DataContext = view.DataContext;
-                }
-
-                // The DataContext is a reference to the ViewModel
-                if (window.MainRegion.DataContext is IDialogAware da)
-                {
-                    da.RequestClose += _ => window.Close();
-                }
-            };
-
-            window.MainRegion.Loaded += loadedHandler;
 
 
-            // To avoid memory leak
-            EventHandler closeHandler = null;
-            closeHandler = (s, e) =>
-            {
-                window.Closed -= closeHandler;
-                window.Closing -= closingHandler;
+            //CancelEventHandler closingHandler = null;
+            //closingHandler = (o, e) =>
+            //{
 
-                window.DataContext = null;
-                window.Content = null;
-                window.MainRegion.DataContext = null;
+            //    if (window.MainRegion.DataContext is IDialogAware da)
+            //    {
+            //        if (!da.CanCloseDialog())
+            //            e.Cancel = true;
+            //    }
+            //};
+            //window.Closing += closingHandler;
 
-                newRegionManager.Regions.ToList().ForEach(r => _regionManager.Regions.Remove(r.Name));
-            };
+            ////// RoutedEventHandler is a predefined delegate in WPF
+            ////// that is used to handle routed events (e.g. Loaded, Click).
+            //RoutedEventHandler loadedHandler = null;
+            //loadedHandler = (s, e) =>
+            //{
+            //    window.MainRegion.Loaded -= loadedHandler;
 
-            window.Closed += closeHandler;
+            //    // Content is a reference to the View
+            //    if (window.MainRegion.Content is FrameworkElement view)
+            //    {
+            //        //window.DataContext = view.DataContext;
+            //        // window.RibbonRegion.DataContext = view.DataContext;
+            //        window.MainRegion.DataContext = view.DataContext;
+            //    }
+
+            //    // The DataContext is a reference to the ViewModel
+            //    if (window.MainRegion.DataContext is IDialogAware da)
+            //    {
+            //        da.RequestClose += _ => window.Close();
+            //    }
+            //};
+
+            //window.MainRegion.Loaded += loadedHandler;
+
+
+            //// To avoid memory leak
+            //EventHandler closeHandler = null;
+            //closeHandler = (s, e) =>
+            //{
+            //    window.Closed -= closeHandler;
+            //    window.Closing -= closingHandler;
+
+            //    window.DataContext = null;
+            //    window.Content = null;
+            //    window.MainRegion.DataContext = null;
+
+            //    newRegionManager.Regions.ToList().ForEach(r => _regionManager.Regions.Remove(r.Name));
+            //};
+
+            //window.Closed += closeHandler;
+
+            newRegionManager.RequestNavigate(regionName, viewName);
 
             window.Owner = Application.Current.MainWindow;
             window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             window.Show();
         }
 
-        private void OnActiveViewsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
-        {
-            if(e.Action == NotifyCollectionChangedAction.Add)
-            {
-                foreach (var item in e.NewItems)
-                {
-                   IDialogAware dialogAware = ((FrameworkElement)item).DataContext as IDialogAware;
-                    if (dialogAware != null)
-                    {
-
-                        
-                    }
-                }
-            }
-        }
+      
     }
 }

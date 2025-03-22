@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using Infragistics.Windows.Ribbon;
+﻿using Infragistics.Windows.Ribbon;
 
 namespace Outlook.Wpf.Core.Dialogs.Controls
 {
