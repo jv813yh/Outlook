@@ -1,10 +1,5 @@
-﻿using System.Windows;
-using Outlook.Core;
-using Outlook.Core.Interfaces;
-using Outlook.Modules.Mail.Views;
-using Prism.Commands;
+﻿using Prism.Commands;
 using Prism.Mvvm;
-using Prism.Regions;
 using Prism.Services.Dialogs;
 
 namespace Outlook.Modules.Mail.ViewModels
@@ -12,13 +7,20 @@ namespace Outlook.Modules.Mail.ViewModels
     /// <summary>
     /// View model for dialog message
     /// </summary>
-	public class MessageDialogViewModel : BindableBase, IDialogAware, IRegionManagerAware
+	public class MessageDialogViewModel : BindableBase, IDialogAware
     {
+        private DelegateCommand _sendMessageCommand;
+        public DelegateCommand SendMessageCommand =>
+            _sendMessageCommand ??= new DelegateCommand(ExecuteSendMessageCommand);
+
         private DelegateCommand _messageCommand;
         public DelegateCommand MessageCommand =>
             _messageCommand ??= new DelegateCommand(ExecuteMessageCommand);
 
-        public IRegionManager RegionManager { get; set; }
+        private void ExecuteMessageCommand()
+        {
+            
+        }
 
         private string _input;
         public string Input
@@ -32,23 +34,15 @@ namespace Outlook.Modules.Mail.ViewModels
 
         }
 
-        private void ExecuteMessageCommand()
+        private void ExecuteSendMessageCommand()
         {
             // Todo: close dialog
-            //RequestClose?.Invoke(new DialogResult());
-            if (RegionManager != null)
-            {
-                RegionManager.RequestNavigate(RegionNames.ContentRegion, nameof(MailList));
-            }
+            RequestClose?.Invoke(new DialogResult());
+
         }
 
         public bool CanCloseDialog()
-        {
-            MessageBoxResult result = MessageBox.Show("Do you really want to close window ?", "MessageDialog Window",
-                MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-            return result == MessageBoxResult.OK ? true : false;
-        }
+         => true;
         
         public void OnDialogClosed()
         {

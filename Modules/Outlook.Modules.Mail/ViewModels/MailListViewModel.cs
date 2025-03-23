@@ -1,18 +1,17 @@
-﻿using Outlook.Business;
+﻿using Outlook.Core;
 using Outlook.Core.Interfaces;
 using Outlook.Core.ViewModels;
 using Outlook.Modules.Mail.Views;
 using Outlook.Services.Interfaces.MailInterfaces;
 using Prism.Commands;
 using Prism.Regions;
-using System.Collections.ObjectModel;
-using System.Windows;
-using Outlook.Core;
 using Prism.Services.Dialogs;
+using System.Collections.ObjectModel;
+using MailMessage = Outlook.Business.MailMessage;
 
 namespace Outlook.Modules.Mail.ViewModels
 {
-	public class MailListViewModel : ViewModelBase, IDialogAware, IRegionManagerAware
+	public class MailListViewModel : ViewModelBase
     {
         // Service to work with mail messages
         private readonly IMailService _mailService;
@@ -51,13 +50,25 @@ namespace Outlook.Modules.Mail.ViewModels
         public DelegateCommand MessageCommand =>
             _messageCommand ?? (_messageCommand = new DelegateCommand(ExecuteMessageCommand));
 
-        public IRegionManager RegionManager { get; set; }
 
         // show UI dialog for writing, sending emails
         private void ExecuteMessageCommand()
         {
-            // TODO
-            _dialogService.ShowRegionDialog(RegionNames.ContentRegion, nameof(MessageDialogView));
+            if (SelectedMailMessage == null)
+                return;
+
+
+            var parameters = new DialogParameters();
+            parameters.Add("id", SelectedMailMessage.Id);
+
+            // show dialog 
+            _dialogService.ShowRegionDialog(RegionNames.ContentRegion, 
+                nameof(MessageDialogView), 
+                parameters,
+                dialogResult =>
+                {
+
+                });
         }
 
         public MailListViewModel(IMailService mailService,
@@ -65,6 +76,8 @@ namespace Outlook.Modules.Mail.ViewModels
         {
             _mailService = mailService;
             _dialogService = dialogService;
+
+            MailMessages = new ObservableCollection<MailMessage>();
         }
 
         public override void OnNavigatedTo(NavigationContext navigationContext)
@@ -84,22 +97,9 @@ namespace Outlook.Modules.Mail.ViewModels
                     MailMessages = new ObservableCollection<MailMessage>(_mailService.GetDeletedMessages());
                     break;
             }
-        }
 
-        public bool CanCloseDialog()
-        {
-           MessageBoxResult result = MessageBox.Show("Do you really want to close window ?", "MailList Window",
-                MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-           return result == MessageBoxResult.OK ? true: false;
-        }
-
-        public void OnDialogClosed()
-        {
-        }
-
-        public void OnDialogOpened(IDialogParameters parameters)
-        {
+            // set the first mail message as selected
+            SelectedMailMessage = MailMessages.FirstOrDefault();
         }
     }
 }
