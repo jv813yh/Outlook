@@ -147,7 +147,23 @@ namespace Outlook.Services.MailServices
             return _deletedMessages;
         }
 
-#endregion
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public MailMessage? GetMessageById(int id) 
+        {
+            var allMessages = new List<MailMessage>();
+            allMessages.AddRange(_testMailMessages);
+            allMessages.AddRange(_sentMessages);
+            allMessages.AddRange(_deletedMessages);
+
+            return allMessages.FirstOrDefault(m => m.Id == id);
+        }
+
+
+        #endregion
 
     }
 }

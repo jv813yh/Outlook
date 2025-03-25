@@ -1,6 +1,10 @@
-﻿using Prism.Commands;
+﻿using Outlook.Business;
+using Outlook.Services.Interfaces.MailInterfaces;
+using Outlook.Services.MailServices;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
+using System.Windows;
 
 namespace Outlook.Modules.Mail.ViewModels
 {
@@ -9,6 +13,15 @@ namespace Outlook.Modules.Mail.ViewModels
     /// </summary>
 	public class MessageDialogViewModel : BindableBase, IDialogAware
     {
+        private readonly IMailService _mailService;
+
+        private MailMessage? _currentMailMessage;
+        public MailMessage? CurrentMailMessage
+        {
+            get => _currentMailMessage;
+            set => SetProperty(ref _currentMailMessage, value);
+        }
+
         private DelegateCommand _sendMessageCommand;
         public DelegateCommand SendMessageCommand =>
             _sendMessageCommand ??= new DelegateCommand(ExecuteSendMessageCommand);
@@ -16,6 +29,7 @@ namespace Outlook.Modules.Mail.ViewModels
         private DelegateCommand _messageCommand;
         public DelegateCommand MessageCommand =>
             _messageCommand ??= new DelegateCommand(ExecuteMessageCommand);
+
 
         private void ExecuteMessageCommand()
         {
@@ -29,9 +43,9 @@ namespace Outlook.Modules.Mail.ViewModels
             set => SetProperty(ref _input, value);
         }
 
-        public MessageDialogViewModel()
+        public MessageDialogViewModel(IMailService mailService)
         {
-
+            _mailService = mailService;
         }
 
         private void ExecuteSendMessageCommand()
@@ -50,6 +64,16 @@ namespace Outlook.Modules.Mail.ViewModels
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
+            var messageId = parameters.GetValue<int>("id");
+
+            try
+            {
+                CurrentMailMessage = _mailService.GetMessageById(messageId);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error loading message");
+            }
         }
 
         public string Title

@@ -5,21 +5,10 @@
              prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid>
 
-        <StackPanel>
-
-            <TextBlock Text="{Binding Title}"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"
-                       FontSize="20"/>
-
-            <TextBox Text="{Binding Input, UpdateSourceTrigger=PropertyChanged,
-                Mode=TwoWay}"
+        <TextBox Text="{Binding CurrentMailMessage.Subject, UpdateSourceTrigger=PropertyChanged}"
                      FontSize="20"
                      Height="30"
                      Width="150"/>
 
-
-        </StackPanel>
-            
     </Grid>
 </UserControl>
