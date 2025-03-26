@@ -6,7 +6,6 @@ using Outlook.Modules.Calendar;
 using Outlook.Modules.Contacts;
 using Outlook.Modules.Mail;
 using Outlook.Wpf.Core.Dialogs;
-using Outlook.Wpf.Core.Dialogs.Controls;
 using Outlook.Wpf.Core.Regions;
 using Outlook.Wpf.ViewModels;
 using Outlook.Wpf.Views;

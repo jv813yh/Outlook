@@ -11,6 +11,7 @@ namespace Outlook.Services.Interfaces.MailInterfaces
 
         IList<MailMessage> GetDeletedMessages();
 
-        MailMessage? GetMessageById(int id);
+        MailMessage GetMessageById(int id);
+        void DeleteMessageById(int id);
     }
 }

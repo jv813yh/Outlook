@@ -152,14 +152,44 @@ namespace Outlook.Services.MailServices
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public MailMessage? GetMessageById(int id) 
+        public MailMessage GetMessageById(int id) 
         {
             var allMessages = new List<MailMessage>();
             allMessages.AddRange(_testMailMessages);
             allMessages.AddRange(_sentMessages);
             allMessages.AddRange(_deletedMessages);
 
-            return allMessages.FirstOrDefault(m => m.Id == id);
+            var returnMessage = allMessages.FirstOrDefault(m => m.Id == id);
+
+            return returnMessage != null ? returnMessage : new MailMessage() { Subject = "Not Found Mail"};
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        public void DeleteMessageById(int id)
+        {
+            var message = _deletedMessages.FirstOrDefault(m => m.Id == id);
+            if (message != null)
+            {
+                _deletedMessages.Remove(message);
+                return;
+            }
+
+            message = _testMailMessages.FirstOrDefault(m => m.Id == id);
+            if (message != null)
+            {
+                _testMailMessages.Remove(message);
+                _deletedMessages.Add(message);
+            }
+
+            message = _sentMessages.FirstOrDefault(m => m.Id == id);
+            if (message != null)
+            {
+                _sentMessages.Remove(message);
+                _deletedMessages.Add(message);
+            }
         }
 
 

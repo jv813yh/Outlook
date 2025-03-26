@@ -30,7 +30,6 @@ public partial class MainWindow : XamRibbonWindow
     /// <param name="e"></param>
     private void XamOutlookBar_OnSelectedGroupChanged(object sender, RoutedEventArgs e)
     {
-        var test = (sender as XamOutlookBar).SelectedGroup;
         var group = (sender as XamOutlookBar).SelectedGroup as IOutlookBarGroup;
         if (group != null)
         {

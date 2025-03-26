@@ -1,6 +1,5 @@
 ﻿using Outlook.Business;
 using Outlook.Services.Interfaces.MailInterfaces;
-using Outlook.Services.MailServices;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
@@ -29,6 +28,18 @@ namespace Outlook.Modules.Mail.ViewModels
         private DelegateCommand _messageCommand;
         public DelegateCommand MessageCommand =>
             _messageCommand ??= new DelegateCommand(ExecuteMessageCommand);
+
+
+        /// <summary>
+        /// Command to delete selected mail message
+        /// </summary>
+        private DelegateCommand _deleteMessageCommand;
+        public DelegateCommand DeleteMessageCommand =>
+            _deleteMessageCommand ?? (_deleteMessageCommand = new DelegateCommand(ExecuteDeleteMessageCommand));
+        private void ExecuteDeleteMessageCommand()
+        {
+
+        }
 
 
         private void ExecuteMessageCommand()
@@ -64,17 +75,19 @@ namespace Outlook.Modules.Mail.ViewModels
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
-            var messageId = parameters.GetValue<int>("id");
+            var messageId = parameters.GetValue<int?>(FolderParameters.MailMessageKey);
 
-            try
+            // if no id is passed, then we are creating a new message
+            if (!messageId.HasValue)
             {
-                CurrentMailMessage = _mailService.GetMessageById(messageId);
+                CurrentMailMessage = new MailMessage();
             }
-            catch (Exception)
+            else
             {
-                MessageBox.Show("Error loading message");
+                CurrentMailMessage = _mailService.GetMessageById(messageId.Value);
             }
         }
+
 
         public string Title
         {

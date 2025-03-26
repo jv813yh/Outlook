@@ -43,12 +43,55 @@ namespace Outlook.Modules.Mail.ViewModels
             set { SetProperty(ref _mailMessages, value); }
         }
 
+        /// <summary>
+        /// Command to show UI dialog for writing, sending emails
+        /// </summary>
+
         private DelegateCommand _messageCommand;
+        public DelegateCommand MessageCommand =>
+            _messageCommand ?? (_messageCommand = new DelegateCommand(ExecuteMessageCommand));
+
+
+        /// <summary>
+        /// Command to create new message
+        /// </summary>
+        private DelegateCommand _newMessageCommand;
+        public DelegateCommand NewMessageCommand =>
+            _newMessageCommand ?? (_newMessageCommand = new DelegateCommand(ExecuteNewMessageCommand));
+        private void ExecuteNewMessageCommand()
+        {
+            var parameters = new DialogParameters();
+            parameters.Add(FolderParameters.MailMessageKey, null);
+
+            // show dialog 
+            _dialogService.ShowRegionDialog(RegionNames.ContentRegion,
+                nameof(MessageDialogView),
+                parameters,
+                (dialogResult) =>
+                {
+
+                });
+        }
 
         public event Action<IDialogResult>? RequestClose;
 
-        public DelegateCommand MessageCommand =>
-            _messageCommand ?? (_messageCommand = new DelegateCommand(ExecuteMessageCommand));
+        /// <summary>
+        /// Command to delete selected mail message
+        /// </summary>
+        private DelegateCommand _deleteMessageCommand;
+        public DelegateCommand DeleteMessageCommand =>
+            _deleteMessageCommand ?? (_deleteMessageCommand = new DelegateCommand(ExecuteDeleteMessageCommand));
+        private void ExecuteDeleteMessageCommand()
+        {
+            if(SelectedMailMessage == null)
+                return;
+
+            // Remove from the database
+            _mailService.DeleteMessageById(SelectedMailMessage.Id);
+
+            // Remove from the UI
+            MailMessages.Remove(SelectedMailMessage);
+        }
 
 
         // show UI dialog for writing, sending emails
@@ -59,7 +102,7 @@ namespace Outlook.Modules.Mail.ViewModels
 
 
             var parameters = new DialogParameters();
-            parameters.Add("id", SelectedMailMessage.Id);
+            parameters.Add(FolderParameters.MailMessageKey, SelectedMailMessage.Id);
 
             // show dialog 
             _dialogService.ShowRegionDialog(RegionNames.ContentRegion, 
@@ -80,6 +123,10 @@ namespace Outlook.Modules.Mail.ViewModels
             MailMessages = new ObservableCollection<MailMessage>();
         }
 
+        /// <summary>
+        /// Load mail messages according to the folder during navigation
+        /// </summary>
+        /// <param name="navigationContext"></param>
         public override void OnNavigatedTo(NavigationContext navigationContext)
         {
             // according the key we can get value

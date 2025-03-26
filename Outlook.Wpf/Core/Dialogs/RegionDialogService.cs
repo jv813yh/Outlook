@@ -1,12 +1,11 @@
-﻿using Outlook.Core.Interfaces;
+﻿using Outlook.Core;
+using Outlook.Core.Interfaces;
 using Outlook.Wpf.Core.Dialogs.Controls;
 using Prism.Ioc;
 using Prism.Regions;
 using Prism.Services.Dialogs;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Windows;
-using Outlook.Core;
 
 namespace Outlook.Wpf.Core.Dialogs
 {

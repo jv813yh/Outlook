@@ -16,7 +16,6 @@ namespace Outlook.Modules.Mail.ViewModels
 
 
         private ObservableCollection<NavigationItem> _items;
-
         public ObservableCollection<NavigationItem> Items
         {
             get => _items;

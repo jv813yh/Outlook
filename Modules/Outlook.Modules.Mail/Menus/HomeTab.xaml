@@ -18,6 +18,10 @@
                            Command="{Binding MessageCommand}"
                            ig:RibbonGroup.MaximumSize="ImageAndTextLarge"/>
 
+            <ig:ButtonTool Caption="Delete"
+                        Command="{Binding DeleteMessageCommand}"
+                        ig:RibbonGroup.MaximumSize="ImageAndTextLarge"/>
+
 
         </ig:ToolHorizontalWrapPanel>
     </ig:RibbonGroup>
