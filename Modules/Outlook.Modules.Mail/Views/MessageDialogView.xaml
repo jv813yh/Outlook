@@ -62,7 +62,7 @@
 
                         <TextBox Grid.Column="1" 
                                    Grid.Row="2" 
-                                   Text="{Binding CurrentMailMessage.Subject, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                   Text="{Binding CurrentMailMessage.Subject, UpdateSourceTrigger=PropertyChanged}" 
                                    FontSize="16" 
                                    Margin="10,0,0,0" />
 
@@ -79,17 +79,21 @@
                                    Height="25" 
                                    Padding="0,7,0,0" />
 
-                        <TextBlock Grid.Column="0" 
+                        <TextBox Grid.Column="0" 
                                    Grid.Row="3" 
                                    Grid.ColumnSpan="2" 
-                                   Text="{Binding CurrentMailMessage.To, Converter={StaticResource MailAddressConverter}}" 
+                                   Text="{Binding CurrentMailMessage.To, 
+                                        UpdateSourceTrigger=PropertyChanged, 
+                                        Converter={StaticResource MailAddressConverter}}" 
                                    VerticalAlignment="Bottom" 
                                    Margin="25,0,0,0" />
 
                         <TextBox Grid.Column="0" 
                                    Grid.Row="4" 
                                    Grid.ColumnSpan="2" 
-                                   Text="{Binding CurrentMailMessage.CC, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                   Text="{Binding CurrentMailMessage.CC, 
+                                          UpdateSourceTrigger=PropertyChanged,
+                                           Converter={StaticResource MailAddressConverter}}" 
                                    Padding="0,7,0,0" 
                                    Height="25" 
                                    Margin="25,0,0,0" />

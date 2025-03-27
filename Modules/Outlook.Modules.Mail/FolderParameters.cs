@@ -3,7 +3,7 @@
     static class FolderParameters
     {
         public const string FolderKey = "Folder";
-        public const string MessageKey = "Message";
+        public const string MailMessageKey = "id";
 
         public const string PersonalFolder = "Personal Folders";
 

@@ -52,26 +52,24 @@ namespace Outlook.Modules.Mail.ViewModels
             _messageCommand ?? (_messageCommand = new DelegateCommand(ExecuteMessageCommand));
 
 
-        /// <summary>
-        /// Command to create new message
-        /// </summary>
         private DelegateCommand _newMessageCommand;
         public DelegateCommand NewMessageCommand =>
             _newMessageCommand ?? (_newMessageCommand = new DelegateCommand(ExecuteNewMessageCommand));
+
         private void ExecuteNewMessageCommand()
         {
             var parameters = new DialogParameters();
             parameters.Add(FolderParameters.MailMessageKey, null);
-
             // show dialog 
             _dialogService.ShowRegionDialog(RegionNames.ContentRegion,
                 nameof(MessageDialogView),
                 parameters,
-                (dialogResult) =>
+                dialogResult =>
                 {
 
                 });
         }
+
 
         public event Action<IDialogResult>? RequestClose;
 
@@ -98,12 +96,12 @@ namespace Outlook.Modules.Mail.ViewModels
         private void ExecuteMessageCommand()
         {
             if (SelectedMailMessage == null)
+            {
                 return;
-
+            }
 
             var parameters = new DialogParameters();
             parameters.Add(FolderParameters.MailMessageKey, SelectedMailMessage.Id);
-
             // show dialog 
             _dialogService.ShowRegionDialog(RegionNames.ContentRegion, 
                 nameof(MessageDialogView), 

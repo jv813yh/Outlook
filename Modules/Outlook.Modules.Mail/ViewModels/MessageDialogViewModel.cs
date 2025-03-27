@@ -18,7 +18,11 @@ namespace Outlook.Modules.Mail.ViewModels
         public MailMessage? CurrentMailMessage
         {
             get => _currentMailMessage;
-            set => SetProperty(ref _currentMailMessage, value);
+            set
+            {
+                SetProperty(ref _currentMailMessage, value);
+                CurrentMailMessage.DataSent = System.DateTime.Now;
+            }
         }
 
         private DelegateCommand _sendMessageCommand;
@@ -28,6 +32,16 @@ namespace Outlook.Modules.Mail.ViewModels
         private DelegateCommand _messageCommand;
         public DelegateCommand MessageCommand =>
             _messageCommand ??= new DelegateCommand(ExecuteMessageCommand);
+
+        private DelegateCommand _newMessageCommand;
+        public DelegateCommand NewMessageCommand =>
+            _newMessageCommand ??= new DelegateCommand(ExecuteNewMessageCommand);
+
+        private void ExecuteNewMessageCommand()
+        {
+        }
+
+
 
 
         /// <summary>
@@ -93,7 +107,6 @@ namespace Outlook.Modules.Mail.ViewModels
         {
             get => "Message Dialog Test";
         }
-
 
         public event Action<IDialogResult>? RequestClose;
     }
