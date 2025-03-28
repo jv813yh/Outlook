@@ -130,22 +130,18 @@ namespace Outlook.Services.MailServices
             => _testMailMessages;
 
         /// <summary>
-        /// 
+        /// Fake method to send mail message
         /// </summary>
         /// <returns></returns>
-        public IList<MailMessage> SentMailMailMessages()
-        {
-            return _sentMessages;
-        }
+        public IList<MailMessage> GetSentMailMailMessages()
+         => _sentMessages;
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
         public IList<MailMessage> GetDeletedMessages()
-        {
-            return _deletedMessages;
-        }
+         => _deletedMessages;
 
         /// <summary>
         /// 
@@ -192,6 +188,11 @@ namespace Outlook.Services.MailServices
             }
         }
 
+        public void SentMailMailMessages(MailMessage currentMailMessage)
+        {
+            currentMailMessage.DataSent = DateTime.Now;
+            _sentMessages.Add(currentMailMessage);
+        }
 
         #endregion
 

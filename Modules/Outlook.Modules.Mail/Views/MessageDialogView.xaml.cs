@@ -9,7 +9,7 @@ namespace Outlook.Modules.Mail.Views
     /// <summary>
     /// Interaction logic for MessageView
     /// </summary>
-    [DependentView(RegionNames.RibbonRegion, typeof(HomeTab))]
+    //[DependentView(RegionNames.RibbonRegion, typeof(HomeTab))]
     [DependentView(RegionNames.RibbonRegion, typeof(MessageTab))]
     public partial class MessageDialogView : UserControl, ISupportDataContext
     {

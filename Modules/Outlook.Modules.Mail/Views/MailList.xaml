@@ -25,6 +25,10 @@
             <igWpf:XamDataGrid DataSource="{Binding MailMessages}"
                                ActiveDataItem="{Binding SelectedMailMessage}">
 
+                <igWpf:XamDataGrid.InputBindings>
+                    <KeyBinding Key="Delete" Command="{Binding DeleteMessageCommand}"/>
+                </igWpf:XamDataGrid.InputBindings>
+
                 <igWpf:XamDataGrid.FieldSettings>
                     <igWpf:FieldSettings AllowEdit="False"/>
                 </igWpf:XamDataGrid.FieldSettings>

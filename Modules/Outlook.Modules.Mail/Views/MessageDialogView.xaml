@@ -21,8 +21,8 @@
 
                 <Grid Margin="5" Name="MessagePreviewArea">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
                     <Grid Margin="10,0,0,0">
@@ -32,15 +32,13 @@
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="25"/>
-                            <RowDefinition Height="35"/>
-                            <RowDefinition Height="25"/>
-                            <RowDefinition Height="25"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
                             <RowDefinition Height="10"/>
                         </Grid.RowDefinitions>
 
-                        <Border Grid.Column="0" 
+                        <!--<Border Grid.Column="0" 
                                 Grid.Row="0" 
                                 Grid.RowSpan="7" 
                                 Width="85" 
@@ -53,7 +51,16 @@
                                        Stretch="UniformToFill"
                                        Margin="3"/>
                             </Grid>
-                        </Border>
+                        </Border>-->
+
+                        <TextBlock Text="Subject: " 
+                                   Grid.Row="1"
+                                   Grid.Column="0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   FontSize="20"
+                                   FontWeight="Bold"/>
+
 
                         <TextBlock Grid.Column="1"
                                    Grid.Row="0" 
@@ -61,44 +68,49 @@
                                    Margin="10,0,0,0" />
 
                         <TextBox Grid.Column="1" 
-                                   Grid.Row="2" 
+                                   Grid.Row="1" 
+                                   Padding="5,3,0,0"
+                                 Height="30"
                                    Text="{Binding CurrentMailMessage.Subject, UpdateSourceTrigger=PropertyChanged}" 
                                    FontSize="16" 
-                                   Margin="10,0,0,0" />
+                                   Margin="0,0,0,0" />
 
                         <TextBlock Grid.Column="0" 
-                                   Grid.Row="3" 
+                                   Grid.Row="2" 
                                    Text="To:" 
+                                   FontSize="16"
                                    HorizontalAlignment="Left" 
                                    VerticalAlignment="Bottom"/>
 
                         <TextBlock Grid.Column="0" 
-                                   Grid.Row="4" 
+                                   Grid.Row="3" 
                                    Text="Cc:"  
+                                   FontSize="16"
                                    HorizontalAlignment="Left" 
-                                   Height="25" 
                                    Padding="0,7,0,0" />
 
                         <TextBox Grid.Column="0" 
-                                   Grid.Row="3" 
+                                   Grid.Row="2" 
                                    Grid.ColumnSpan="2" 
                                    Text="{Binding CurrentMailMessage.To, 
                                         UpdateSourceTrigger=PropertyChanged, 
                                         Converter={StaticResource MailAddressConverter}}" 
                                    VerticalAlignment="Bottom" 
-                                   Margin="25,0,0,0" />
+                                   Padding="5,3,0,0"
+                                 Height="25"
+                                   Margin="25,5,0,0" />
 
                         <TextBox Grid.Column="0" 
-                                   Grid.Row="4" 
+                                   Grid.Row="3" 
                                    Grid.ColumnSpan="2" 
                                    Text="{Binding CurrentMailMessage.CC, 
                                           UpdateSourceTrigger=PropertyChanged,
                                            Converter={StaticResource MailAddressConverter}}" 
-                                   Padding="0,7,0,0" 
+                                        Padding="5,3,0,0"
                                    Height="25" 
-                                   Margin="25,0,0,0" />
+                                   Margin="25,5,0,0" />
 
-                        <Border Grid.Row="6" 
+                        <Border Grid.Row="4" 
                                 Grid.Column="0" 
                                 Grid.ColumnSpan="2" 
                                 BorderBrush="#FFD4D4D4"  

@@ -13,6 +13,8 @@
 
         public const string MailListPath = "MailList";
 
+        public const string MessageSent = "messageSent";
+
         public static string GetNavigationPath(string path, string key, string folder)
          => $"{path}?{key}={folder}";
     }

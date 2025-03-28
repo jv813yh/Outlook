@@ -75,8 +75,12 @@ namespace Outlook.Modules.Mail.ViewModels
 
         private void ExecuteSendMessageCommand()
         {
-            // Todo: close dialog
-            RequestClose?.Invoke(new DialogResult());
+            _mailService.SentMailMailMessages(CurrentMailMessage);
+
+            IDialogParameters dialogParameters = new DialogParameters();
+            dialogParameters.Add(FolderParameters.MessageSent, CurrentMailMessage);
+
+            RequestClose?.Invoke(new DialogResult(ButtonResult.OK, dialogParameters));
 
         }
 
@@ -94,7 +98,11 @@ namespace Outlook.Modules.Mail.ViewModels
             // if no id is passed, then we are creating a new message
             if (!messageId.HasValue)
             {
-                CurrentMailMessage = new MailMessage();
+                CurrentMailMessage = new MailMessage() 
+                {
+                    // default values
+                    From = "test123@microsoft.com",
+                };
             }
             else
             {

@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Linq;
 using System.Windows.Data;
 
 namespace Outlook.Modules.Mail.Converters
@@ -21,17 +20,24 @@ namespace Outlook.Modules.Mail.Converters
 
         public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
+            var emailsCollection = new ObservableCollection<string>();
+
             var emails = value as string;
+
+            if (string.IsNullOrEmpty(value?.ToString()))
+            {
+                return emailsCollection;
+            }
 
             if (emails != null)
             {
                 var emailsArray = emails.Split(',');
                 emailsArray.ToList().ForEach(x => x.Trim());
 
-                return new ObservableCollection<string>(emailsArray);
+                return emailsCollection.AddRange(emailsArray);
             }
 
-            return string.Empty;
+            return emailsCollection;
         }
     }
 }
