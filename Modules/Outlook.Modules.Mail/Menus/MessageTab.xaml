@@ -9,7 +9,7 @@
                   mc:Ignorable="d">
 
     <!-- The RibbonGroup is a container for Ribbon controls with name New -->
-    <ig:RibbonGroup Caption="New">
+    <ig:RibbonGroup Caption="New Message">
 
         <!-- In horizontal direction -->
         <ig:ToolHorizontalWrapPanel>
@@ -20,7 +20,89 @@
                            Command="{Binding SendMessageCommand}"
                            ig:RibbonGroup.MaximumSize="ImageAndTextLarge"/>
 
+            <!--
+                The ButtonTool
+                behaves similarly to a standard Button, 
+                but is optimized for the ribbon and toolbar
+            -->
 
         </ig:ToolHorizontalWrapPanel>
+
+        <Border BorderBrush="#f0f0f0f0"
+                BorderThickness="1"/>
+
+        <!-- 
+             Automatically map to standard keyboard shortcuts.
+             We can use them by setting 
+             Command property and ApplicationCommands 
+        -->
+        <ig:ButtonGroup>
+            <ig:ButtonTool Caption="Cut"
+                              x:Name="cut"
+                           Command="ApplicationCommands.Cut"/>
+            <ig:ButtonTool Caption="Copy"
+                              x:Name="copy"
+                           Command="ApplicationCommands.Copy"/>
+            <ig:ButtonTool Caption="Paste"
+                              x:Name="paste"
+                           Command="ApplicationCommands.Paste"/>
+        </ig:ButtonGroup>
+
+        <ig:ButtonGroup HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+
+            <!--
+                The ComboEditorTool
+                behaves similarly to a A ComboBox that allows you 
+                to select values ​​from a list. 
+                It is used in a ribbon menu or toolbar.
+            -->
+
+            <ig:ComboEditorTool 
+                                Caption="Font Size"
+                                x:Name="fontSizes"
+                                Width="150"
+                                Height="20"
+                                SelectedItemChanged="fontSizes_SelectedItemChanged"/>
+
+            <ig:ComboEditorTool 
+                                x:Name="fontNames"
+                                Width="150"
+                                Height="20"
+                                SelectedItemChanged="fontNames_SelectedItemChanged"/>
+
+        </ig:ButtonGroup>
+
+        
+        
+        <ig:ButtonGroup>
+            <ig:ToggleButtonTool x:Name="boldButton"
+                                 Caption="Bold"
+                                 Command="EditingCommands.ToggleBold"/>
+            
+            <ig:ToggleButtonTool x:Name="italicButton"
+                                 Caption="Italic"
+                                 Command="EditingCommands.ToggleItalic"/>
+            
+            <ig:ToggleButtonTool x:Name="underlineButton"
+                                 Caption="Underline"
+                                 Command="EditingCommands.ToggleUnderline"/>
+        </ig:ButtonGroup>
+
+
+        <ig:ButtonGroup>
+            <ig:RadioButtonTool Caption="Left"
+                           x:Name="alignLeft"
+                          Command="EditingCommands.AlignLeft"/>
+            <ig:RadioButtonTool Caption="Center"
+                            x:Name="alignCenter"
+                          Command="EditingCommands.AlignCenter"/>
+            <ig:RadioButtonTool Caption="Right"
+                            x:Name="alignRight"
+                          Command="EditingCommands.AlignRight"/>
+        </ig:ButtonGroup>
+
+
+
     </ig:RibbonGroup>
 </ig:RibbonTabItem>

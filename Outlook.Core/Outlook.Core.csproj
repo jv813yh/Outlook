@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Infragistics.WPF.Ribbon.Trial" Version="24.2.53" />
+    <PackageReference Include="Infragistics.WPF.RichTextEditor.Trial" Version="24.2.53" />
     <PackageReference Include="Prism.Core" Version="8.0.0.1909" />
     <PackageReference Include="Prism.Wpf" Version="8.0.0.1909" />
   </ItemGroup>

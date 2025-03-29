@@ -130,9 +130,9 @@
                         a format that the RichTextEditor can display.
                 -->
                     <ig:RtfDocumentAdapter Grid.Row="1"
-                                       Document="{Binding Document, ElementName=RichTextEditor}"
+                                       Document="{Binding Document, ElementName=richTextEditor}"
                                        Value="{Binding CurrentMailMessage.Body}"/>
-                    <ig:XamRichTextEditor x:Name="RichTextEditor"
+                    <ig:XamRichTextEditor x:Name="richTextEditor"
                                       Margin="10,5,0,10"
                                       Grid.Row="1"
                                       AllowDocumentViewSplitting="False"/>

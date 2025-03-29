@@ -72,6 +72,15 @@ namespace Outlook.Wpf.Core.Regions
                                 infoDC.DataContext = viewDC.DataContext;
                             }
 
+
+                            // We set the RichTextEditor property of the dependent view
+                            // to the RichTextEditor property of the view
+                            if (info.View is ISupportRichText infoRT &&
+                                view is ISupportRichText viewRT)
+                            { 
+                                infoRT.RichTextEditor = viewRT.RichTextEditor;  
+                            }
+
                             dependentViews.Add(info);
                         }
 
