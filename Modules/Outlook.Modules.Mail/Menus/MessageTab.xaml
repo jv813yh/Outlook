@@ -59,7 +59,6 @@
             -->
 
             <ig:ComboEditorTool 
-                                Caption="Font Size"
                                 x:Name="fontSizes"
                                 Width="150"
                                 Height="20"

@@ -80,6 +80,9 @@ namespace Outlook.Modules.Mail.ViewModels
             IDialogParameters dialogParameters = new DialogParameters();
             dialogParameters.Add(FolderParameters.MessageSent, CurrentMailMessage);
 
+            MessageBox.Show("Message was sent sucessfully", "Information", 
+                MessageBoxButton.OK, MessageBoxImage.Information);
+
             RequestClose?.Invoke(new DialogResult(ButtonResult.OK, dialogParameters));
 
         }
