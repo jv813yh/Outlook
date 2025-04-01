@@ -15,17 +15,44 @@
             <!-- Defines button in ribbon group New
                  with text Button and shows image and text together -->
             <ig:ButtonTool Caption="New"
+                           SmallImage="../Resources/Images/new_email.png"
                            Command="{Binding NewMessageCommand}"
                            ig:RibbonGroup.MaximumSize="ImageAndTextLarge"/>
 
-            <ig:ButtonTool Caption="Reply"
-                           Command="{Binding ReplyMessageCommand}"
-                           ig:RibbonGroup.MaximumSize="ImageAndTextLarge"/>
+        </ig:ToolHorizontalWrapPanel>
+    </ig:RibbonGroup>
+
+    <ig:RibbonGroup Caption="Delete">
+
+        <ig:ToolHorizontalWrapPanel>
 
             <ig:ButtonTool Caption="Delete"
-                        Command="{Binding DeleteMessageCommand}"
+                            SmallImage="../Resources/Images/delete_email.png"
+                     Command="{Binding DeleteMessageCommand}"
+                     ig:RibbonGroup.MaximumSize="ImageAndTextLarge"/>
+
+
+        </ig:ToolHorizontalWrapPanel>
+    </ig:RibbonGroup>
+
+    <ig:RibbonGroup Caption="Respond">
+
+        <ig:ToolHorizontalWrapPanel>
+
+            <ig:ButtonTool Caption="Reply"
+                            SmallImage="../Resources/Images/reply_email.png"
+                        Command="{Binding ReplyMessageCommand}"
                         ig:RibbonGroup.MaximumSize="ImageAndTextLarge"/>
 
+            <ig:ButtonTool Caption="ReplyAll"
+                            SmallImage="../Resources/Images/replyall_email.png"
+                     Command="{Binding ReplyAllMessageCommand}"
+                     ig:RibbonGroup.MaximumSize="ImageAndTextLarge"/>
+
+            <ig:ButtonTool Caption="Forward"
+                            SmallImage="../Resources/Images/forward_email.png"
+                           Command="{Binding ForwardMessageCommand}"
+                           ig:RibbonGroup.MaximumSize="ImageAndTextLarge"/>
 
         </ig:ToolHorizontalWrapPanel>
     </ig:RibbonGroup>

@@ -9,6 +9,16 @@
 
   <ItemGroup>
     <None Remove="Images\user.png" />
+    <None Remove="Resources\Images\bold_message.png" />
+    <None Remove="Resources\Images\copy_message.png" />
+    <None Remove="Resources\Images\cut_message.png" />
+    <None Remove="Resources\Images\delete_email.png" />
+    <None Remove="Resources\Images\forward_email.png" />
+    <None Remove="Resources\Images\italic_font_message.png" />
+    <None Remove="Resources\Images\new_email.png" />
+    <None Remove="Resources\Images\paste_message.png" />
+    <None Remove="Resources\Images\replyall_email.png" />
+    <None Remove="Resources\Images\reply_email.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,6 +48,36 @@
 
   <ItemGroup>
     <Resource Include="Images\user.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\bold_message.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\copy_message.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\cut_message.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\delete_email.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\forward_email.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\italic_font_message.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\new_email.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\paste_message.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\replyall_email.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\reply_email.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

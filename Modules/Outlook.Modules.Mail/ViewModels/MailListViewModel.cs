@@ -49,6 +49,22 @@ namespace Outlook.Modules.Mail.ViewModels
         /// Command to show UI dialog for writing, sending emails
         /// </summary>
 
+        private DelegateCommand _replyAllMessageCommand;
+        public DelegateCommand ReplyAllMessageCommand =>
+            _replyAllMessageCommand ?? (_replyAllMessageCommand = new DelegateCommand(ExecuteReplyAllMessageCommand));
+
+        private void ExecuteReplyAllMessageCommand()
+        {
+        }
+
+        private DelegateCommand _forwardMessageCommand;
+        public DelegateCommand ForwardMessageCommand =>
+            _forwardMessageCommand ?? (_forwardMessageCommand = new DelegateCommand(ExecuteForwardMessageCommand));
+
+        private void ExecuteForwardMessageCommand()
+        {
+        }
+
         private DelegateCommand _newMessageCommand;
         public DelegateCommand NewMessageCommand =>
             _newMessageCommand ?? (_newMessageCommand = new DelegateCommand(ExecuteNewMessageCommand));
