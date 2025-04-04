@@ -94,7 +94,7 @@
                             BorderThickness="0.4" 
                             VerticalAlignment="Top">
                         <Grid>
-                            <Image Source="/Outlook.Modules.Mail;component/Images/user.png" 
+                            <Image Source="/Outlook.Modules.Mail;component/Resources/Images/user.png" 
                                    Stretch="UniformToFill"
                                    Margin="3"/>
                         </Grid>

@@ -45,59 +45,69 @@
 
     <ig:RibbonGroup Caption="Font">
 
-        <!--
-                    The ComboEditorTool
-                    behaves similarly to a A ComboBox that allows you 
-                    to select values ​​from a list. 
-                    It is used in a ribbon menu or toolbar.
-                -->
+        <ig:ToolHorizontalWrapPanel>
 
-        <ig:ButtonGroup>
+            <ig:ButtonGroup>
 
-            <ig:ComboEditorTool 
-                                    x:Name="fontSizes"
-                                    Width="150"
-                                    Height="20"
-                                    SelectedItemChanged="fontSizes_SelectedItemChanged"/>
+                <!--
+                        The ComboEditorTool
+                        behaves similarly to a A ComboBox that allows you 
+                        to select values ​​from a list. 
+                        It is used in a ribbon menu or toolbar.
+                    -->
 
-        <ig:ComboEditorTool 
-                                    x:Name="fontNames"
-                                    Width="150"
-                                    Height="20"
-                                    SelectedItemChanged="fontNames_SelectedItemChanged"/>
+                <ig:ComboEditorTool 
+                        x:Name="fontSizes"
+                        SelectedItemChanged="fontSizes_SelectedItemChanged"/>
 
-        </ig:ButtonGroup>
+                <ig:ComboEditorTool 
+                        
+                        x:Name="fontNames"
+                        SelectedItemChanged="fontNames_SelectedItemChanged"/>
 
+            </ig:ButtonGroup>
+
+            <ig:ButtonGroup>
+
+                <ig:ToggleButtonTool x:Name="boldButton"
+                      Caption="Bold"
+                      SmallImage="../Resources/Images/bold_message.png"
+                      Command="EditingCommands.ToggleBold"/>
+
+                <ig:ToggleButtonTool x:Name="italicButton"
+                      Caption="Italic"
+                      SmallImage="../Resources/Images/italic_font_message.png"
+                      Command="EditingCommands.ToggleItalic"/>
+
+                <ig:ToggleButtonTool x:Name="underlineButton"
+                      Caption="Underline"
+                      SmallImage="../Resources/Images/underline_message.png"
+                      Command="EditingCommands.ToggleUnderline"/>
+
+            </ig:ButtonGroup>
+
+            
+        </ig:ToolHorizontalWrapPanel>
 
     </ig:RibbonGroup>
 
 
     <ig:RibbonGroup Caption="Paragraph">
-        <ig:ButtonGroup>
-                <ig:ToggleButtonTool x:Name="boldButton"
-                                     Caption="Bold"
-                                     Command="EditingCommands.ToggleBold"/>
-            
-                <ig:ToggleButtonTool x:Name="italicButton"
-                                     Caption="Italic"
-                                     Command="EditingCommands.ToggleItalic"/>
-            
-                <ig:ToggleButtonTool x:Name="underlineButton"
-                                     Caption="Underline"
-                                     Command="EditingCommands.ToggleUnderline"/>
-        </ig:ButtonGroup>
 
 
         <ig:ButtonGroup>
                 <ig:RadioButtonTool Caption="Left"
-                                       x:Name="alignLeft"
-                                      Command="EditingCommands.AlignLeft"/>
+                                    x:Name="alignLeft"
+                                    SmallImage="../Resources/Images/left_align_message.png"
+                                    Command="EditingCommands.AlignLeft"/>
                 <ig:RadioButtonTool Caption="Center"
-                                        x:Name="alignCenter"
-                                      Command="EditingCommands.AlignCenter"/>
+                                    x:Name="alignCenter"
+                                    SmallImage="../Resources/Images/center_align_message.png"
+                                    Command="EditingCommands.AlignCenter"/>
                 <ig:RadioButtonTool Caption="Right"
-                                        x:Name="alignRight"
-                                      Command="EditingCommands.AlignRight"/>
+                                    x:Name="alignRight"
+                                    SmallImage="../Resources/Images/right_align_message.png"
+                                    Command="EditingCommands.AlignRight"/>
         </ig:ButtonGroup>
 
 

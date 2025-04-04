@@ -8,17 +8,21 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Images\user.png" />
     <None Remove="Resources\Images\bold_message.png" />
+    <None Remove="Resources\Images\center_align_message.png" />
     <None Remove="Resources\Images\copy_message.png" />
     <None Remove="Resources\Images\cut_message.png" />
     <None Remove="Resources\Images\delete_email.png" />
     <None Remove="Resources\Images\forward_email.png" />
     <None Remove="Resources\Images\italic_font_message.png" />
+    <None Remove="Resources\Images\left_align_message.png" />
     <None Remove="Resources\Images\new_email.png" />
     <None Remove="Resources\Images\paste_message.png" />
     <None Remove="Resources\Images\replyall_email.png" />
     <None Remove="Resources\Images\reply_email.png" />
+    <None Remove="Resources\Images\right_align_message.png" />
+    <None Remove="Resources\Images\send_message.png" />
+    <None Remove="Resources\Images\underline_message.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -47,10 +51,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Images\user.png">
+    <Resource Include="Resources\Images\send_message.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\user.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\bold_message.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\center_align_message.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\copy_message.png">
@@ -68,6 +78,9 @@
     <Resource Include="Resources\Images\italic_font_message.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\left_align_message.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\new_email.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -78,6 +91,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\reply_email.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\right_align_message.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\underline_message.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
