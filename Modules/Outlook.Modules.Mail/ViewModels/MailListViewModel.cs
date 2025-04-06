@@ -45,6 +45,31 @@ namespace Outlook.Modules.Mail.ViewModels
             set { SetProperty(ref _mailMessages, value); }
         }
 
+
+        private DelegateCommand _selectMessageCommand;
+        public DelegateCommand SelectMessageCommand =>
+            _selectMessageCommand ?? (_selectMessageCommand = new DelegateCommand(ExecuteSelectMessageCommand));
+
+        private void ExecuteSelectMessageCommand()
+        {
+            DialogParameters parameters = new DialogParameters();
+            parameters.Add(FolderParameters.MailMessageKey, SelectedMailMessage.Id);
+
+            // show dialog
+            _dialogService.ShowRegionDialog(RegionNames.ContentRegion,
+                nameof(MessageDialogView),
+                parameters,
+                dialogResult =>
+                {
+                    if (dialogResult.Result == ButtonResult.OK)
+                    {
+                        // do something
+                    }
+                });
+        }
+
+
+
         /// <summary>
         /// Command to show UI dialog for writing, sending emails
         /// </summary>
@@ -82,6 +107,7 @@ namespace Outlook.Modules.Mail.ViewModels
         {
             var parameters = new DialogParameters();
             parameters.Add(FolderParameters.MailMessageKey, null);
+
             // show dialog 
             _dialogService.ShowRegionDialog(RegionNames.ContentRegion,
                 nameof(MessageDialogView),

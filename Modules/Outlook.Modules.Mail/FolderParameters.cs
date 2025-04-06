@@ -1,4 +1,7 @@
-﻿namespace Outlook.Modules.Mail
+﻿using System.Net.NetworkInformation;
+using System.Security.Policy;
+
+namespace Outlook.Modules.Mail
 {
     static class FolderParameters
     {

@@ -21,45 +21,13 @@ namespace Outlook.Modules.Mail.ViewModels
             set
             {
                 SetProperty(ref _currentMailMessage, value);
-                CurrentMailMessage.DataSent = System.DateTime.Now;
+                CurrentMailMessage.DataSent = DateTime.Now;
             }
         }
 
         private DelegateCommand _sendMessageCommand;
         public DelegateCommand SendMessageCommand =>
             _sendMessageCommand ??= new DelegateCommand(ExecuteSendMessageCommand);
-
-        private DelegateCommand _messageCommand;
-        public DelegateCommand MessageCommand =>
-            _messageCommand ??= new DelegateCommand(ExecuteMessageCommand);
-
-        private DelegateCommand _newMessageCommand;
-        public DelegateCommand NewMessageCommand =>
-            _newMessageCommand ??= new DelegateCommand(ExecuteNewMessageCommand);
-
-        private void ExecuteNewMessageCommand()
-        {
-        }
-
-
-
-
-        /// <summary>
-        /// Command to delete selected mail message
-        /// </summary>
-        private DelegateCommand _deleteMessageCommand;
-        public DelegateCommand DeleteMessageCommand =>
-            _deleteMessageCommand ?? (_deleteMessageCommand = new DelegateCommand(ExecuteDeleteMessageCommand));
-        private void ExecuteDeleteMessageCommand()
-        {
-
-        }
-
-
-        private void ExecuteMessageCommand()
-        {
-            
-        }
 
         private string _input;
         public string Input
@@ -75,6 +43,7 @@ namespace Outlook.Modules.Mail.ViewModels
 
         private void ExecuteSendMessageCommand()
         {
+            // Simulate sending a message
             _mailService.SentMailMailMessages(CurrentMailMessage);
 
             IDialogParameters dialogParameters = new DialogParameters();
@@ -83,6 +52,7 @@ namespace Outlook.Modules.Mail.ViewModels
             MessageBox.Show("Message was sent sucessfully", "Information", 
                 MessageBoxButton.OK, MessageBoxImage.Information);
 
+            // Invoke the RequestClose event to close the dialog with the parameters
             RequestClose?.Invoke(new DialogResult(ButtonResult.OK, dialogParameters));
 
         }

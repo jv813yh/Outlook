@@ -26,6 +26,10 @@
                                ActiveDataItem="{Binding SelectedMailMessage}">
 
                 <igWpf:XamDataGrid.InputBindings>
+
+                    <MouseBinding MouseAction="LeftDoubleClick"
+                                  Command="{Binding SelectMessageCommand}"/>
+                    
                     <KeyBinding Key="Delete" Command="{Binding DeleteMessageCommand}"/>
                 </igWpf:XamDataGrid.InputBindings>
 
