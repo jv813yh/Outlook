@@ -28,7 +28,8 @@
                 <igWpf:XamDataGrid.InputBindings>
 
                     <MouseBinding MouseAction="LeftDoubleClick"
-                                  Command="{Binding SelectMessageCommand}"/>
+                                  Command="{Binding SelectMessageCommand}"
+                                  CommandParameter="ReadOnly"/>
                     
                     <KeyBinding Key="Delete" Command="{Binding DeleteMessageCommand}"/>
                 </igWpf:XamDataGrid.InputBindings>

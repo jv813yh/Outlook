@@ -46,18 +46,22 @@ namespace Outlook.Modules.Mail.ViewModels
         }
 
 
-        private DelegateCommand _selectMessageCommand;
-        public DelegateCommand SelectMessageCommand =>
-            _selectMessageCommand ?? (_selectMessageCommand = new DelegateCommand(ExecuteSelectMessageCommand));
+        private DelegateCommand<string> _selectMessageCommand;
+        public DelegateCommand<string> SelectMessageCommand =>
+            _selectMessageCommand ?? (_selectMessageCommand = new DelegateCommand<string>(ExecuteSelectMessageCommand));
 
-        private void ExecuteSelectMessageCommand()
+        private void ExecuteSelectMessageCommand(string obj)
         {
             DialogParameters parameters = new DialogParameters();
-            parameters.Add(FolderParameters.MailMessageKey, SelectedMailMessage.Id);
+            parameters.Add(MailParameters.MailMessageId, SelectedMailMessage.Id);
+
+            string messageViewName = obj.Contains("ReadOnly") ? 
+                nameof(MessageReadOnlyView) : 
+                nameof(MessageDialogView);
 
             // show dialog
             _dialogService.ShowRegionDialog(RegionNames.ContentRegion,
-                nameof(MessageDialogView),
+                messageViewName,
                 parameters,
                 dialogResult =>
                 {
@@ -67,8 +71,6 @@ namespace Outlook.Modules.Mail.ViewModels
                     }
                 });
         }
-
-
 
         /// <summary>
         /// Command to show UI dialog for writing, sending emails

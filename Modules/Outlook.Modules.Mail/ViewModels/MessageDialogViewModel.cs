@@ -21,7 +21,6 @@ namespace Outlook.Modules.Mail.ViewModels
             set
             {
                 SetProperty(ref _currentMailMessage, value);
-                CurrentMailMessage.DataSent = DateTime.Now;
             }
         }
 
@@ -66,7 +65,7 @@ namespace Outlook.Modules.Mail.ViewModels
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
-            var messageId = parameters.GetValue<int?>(FolderParameters.MailMessageKey);
+            var messageId = parameters.GetValue<int?>(MailParameters.MailMessageId);
 
             // if no id is passed, then we are creating a new message
             if (!messageId.HasValue)

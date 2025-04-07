@@ -33,6 +33,8 @@ namespace Outlook.Modules.Mail
 
             // Register the dialog view and viewModel with the container
             containerRegistry.RegisterDialog<MessageDialogView, MessageDialogViewModel>();
+
+            containerRegistry.RegisterDialog<MessageReadOnlyView, MessageReadOnlyViewModel>();
         }
 
         public void OnInitialized(IContainerProvider containerProvider)
