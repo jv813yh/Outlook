@@ -1,6 +1,7 @@
 ﻿using Outlook.Core;
 using Outlook.Core.Interfaces;
 using Outlook.Core.ViewModels;
+using Outlook.Modules.Mail.Models;
 using Outlook.Modules.Mail.Views;
 using Outlook.Services.Interfaces.MailInterfaces;
 using Prism.Commands;
@@ -52,24 +53,35 @@ namespace Outlook.Modules.Mail.ViewModels
 
         private void ExecuteSelectMessageCommand(string obj)
         {
+            if(SelectedMailMessage == null)
+                return;
+
+            //  Default values
+            string viewName = "MessageDialogView";
             DialogParameters parameters = new DialogParameters();
             parameters.Add(MailParameters.MailMessageId, SelectedMailMessage.Id);
 
-            string messageViewName = obj.Contains("ReadOnly") ? 
-                nameof(MessageReadOnlyView) : 
-                nameof(MessageDialogView);
+            // Set default message mode
+            MessageModes messageModes = MessageModes.New;
+
+            if (obj == "Read")
+                viewName = "MessageReadOnlyView";
+            else if (obj == "Reply")
+                messageModes = MessageModes.Reply;
+
+            parameters.Add(MailParameters.MailMessageMode, messageModes);
 
             // show dialog
             _dialogService.ShowRegionDialog(RegionNames.ContentRegion,
-                messageViewName,
-                parameters,
-                dialogResult =>
-                {
-                    if (dialogResult.Result == ButtonResult.OK)
+                    viewName,
+                    parameters,
+                    dialogResult =>
                     {
-                        // do something
-                    }
-                });
+                        if (dialogResult.Result == ButtonResult.OK)
+                        {
+                            // do something
+                        }
+                    });
         }
 
         /// <summary>

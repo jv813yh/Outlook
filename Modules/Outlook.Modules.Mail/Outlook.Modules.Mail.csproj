@@ -26,10 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Infragistics.WPF.DataGrids.Trial" Version="24.2.53" />
     <PackageReference Include="Infragistics.WPF.DataTree.Trial" Version="24.2.53" />
     <PackageReference Include="Infragistics.WPF.OutlookBar.Trial" Version="24.2.53" />

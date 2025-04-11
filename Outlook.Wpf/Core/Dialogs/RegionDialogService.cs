@@ -45,89 +45,93 @@ namespace Outlook.Wpf.Core.Dialogs
             IRegion region = newRegionManager.Regions[RegionNames.ContentRegion];
             // Get the active view
             var activeViews = region.ActiveViews.FirstOrDefault() as FrameworkElement;
-            // Get the DataContext of the active view by casting it to IDialogAware
-            IDialogAware dialogAware = activeViews.DataContext as IDialogAware;
 
-            if (dialogAware != null)
+            if (activeViews != null)
             {
-                // Insert parameters into the dialogAware object
-                dialogAware.OnDialogOpened(dialogParameters);
+                // Get the DataContext of the active view by casting it to IDialogAware
+                IDialogAware dialogAware = activeViews.DataContext as IDialogAware;
 
-                CancelEventHandler closingHandler = null;
-                //IDialogAware dialogAware = ((FrameworkElement)window.MainRegion).DataContext as IDialogAware;
-
-                // Handler for closing the dialog window
-                Action<IDialogResult> requestCloseHandler = null;
-                requestCloseHandler = (dialogResult) =>
+                if (dialogAware != null)
                 {
-                    window.Result = dialogResult;
-                    window.Close();
-                };
+                    // Insert parameters into the dialogAware object
+                    dialogAware.OnDialogOpened(dialogParameters);
 
-                // Handler for verifying if the dialog can be closed
-                closingHandler = (o, e) =>
-                {
+                    CancelEventHandler closingHandler = null;
+                    //IDialogAware dialogAware = ((FrameworkElement)window.MainRegion).DataContext as IDialogAware;
 
-                    if (!dialogAware.CanCloseDialog())
-                        e.Cancel = true;
-                };
-                window.Closing += closingHandler;
-
-                //// RoutedEventHandler is a predefined delegate in WPF
-                //// that is used to handle routed events (e.g. Loaded, Click).
-                RoutedEventHandler loadedHandler = null;
-                loadedHandler = (s, e) =>
-                {
-                    window.MainRegion.Loaded -= loadedHandler;
-
-                    // Content is a reference to the View
-                    //window.DataContext = view.DataContext;
-                    // window.RibbonRegion.DataContext = view.DataContext;
-                    window.MainRegion.DataContext = dialogAware;
-
-                    // The DataContext is a reference to the ViewModel
-                    dialogAware.RequestClose += requestCloseHandler;
-                    //dialogAware.RequestClose += _ => window.Close();
-                };
-
-                window.MainRegion.Loaded += loadedHandler;
-
-
-                // To avoid memory leak
-                EventHandler closeHandler = null;
-                closeHandler = (s, e) =>
-                {
-                    window.Closed -= closeHandler;
-                    window.Closing -= closingHandler;
-
-                    dialogAware.OnDialogClosed();
-                    // todo: get dialog results
-
-                    var dialogResults = window.Result;
-                    if (dialogResults == null)
+                    // Handler for closing the dialog window
+                    Action<IDialogResult> requestCloseHandler = null;
+                    requestCloseHandler = (dialogResult) =>
                     {
-                        dialogResults = new DialogResult();
-                    }
+                        window.Result = dialogResult;
+                        window.Close();
+                    };
 
-                    callback?.Invoke(dialogResults);
+                    // Handler for verifying if the dialog can be closed
+                    closingHandler = (o, e) =>
+                    {
+
+                        if (!dialogAware.CanCloseDialog())
+                            e.Cancel = true;
+                    };
+                    window.Closing += closingHandler;
+
+                    //// RoutedEventHandler is a predefined delegate in WPF
+                    //// that is used to handle routed events (e.g. Loaded, Click).
+                    RoutedEventHandler loadedHandler = null;
+                    loadedHandler = (s, e) =>
+                    {
+                        window.MainRegion.Loaded -= loadedHandler;
+
+                        // Content is a reference to the View
+                        //window.DataContext = view.DataContext;
+                        // window.RibbonRegion.DataContext = view.DataContext;
+                        window.MainRegion.DataContext = dialogAware;
+
+                        // The DataContext is a reference to the ViewModel
+                        dialogAware.RequestClose += requestCloseHandler;
+                        //dialogAware.RequestClose += _ => window.Close();
+                    };
+
+                    window.MainRegion.Loaded += loadedHandler;
 
 
-                    window.DataContext = null;
-                    window.Content = null;
-                    //window.MainRegion.DataContext = null;
+                    // To avoid memory leak
+                    EventHandler closeHandler = null;
+                    closeHandler = (s, e) =>
+                    {
+                        window.Closed -= closeHandler;
+                        window.Closing -= closingHandler;
 
-                    newRegionManager.Regions.ToList().ForEach(r => _regionManager.Regions.Remove(r.Name));
-                };
+                        dialogAware.OnDialogClosed();
+                        // todo: get dialog results
 
-                window.Closed += closeHandler;
+                        var dialogResults = window.Result;
+                        if (dialogResults == null)
+                        {
+                            dialogResults = new DialogResult();
+                        }
 
+                        callback?.Invoke(dialogResults);
+
+
+                        window.DataContext = null;
+                        window.Content = null;
+                        //window.MainRegion.DataContext = null;
+
+                        newRegionManager.Regions.ToList().ForEach(r => _regionManager.Regions.Remove(r.Name));
+                    };
+
+                    window.Closed += closeHandler;
+
+                }
+
+                //newRegionManager.RequestNavigate(regionName, viewName);
+
+                window.Owner = Application.Current.MainWindow;
+                window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                window.Show();
             }
-
-            //newRegionManager.RequestNavigate(regionName, viewName);
-
-            window.Owner = Application.Current.MainWindow;
-            window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            window.Show();
         }
     }
 }

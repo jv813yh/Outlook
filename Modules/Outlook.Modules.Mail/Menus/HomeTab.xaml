@@ -41,7 +41,8 @@
 
             <ig:ButtonTool Caption="Reply"
                             SmallImage="../Resources/Images/reply_email.png"
-                        Command="{Binding ReplyMessageCommand}"
+                        Command="{Binding SelectMessageCommand}"
+                           CommandParameter="Reply"
                         ig:RibbonGroup.MaximumSize="ImageAndTextLarge"/>
 
             <ig:ButtonTool Caption="ReplyAll"

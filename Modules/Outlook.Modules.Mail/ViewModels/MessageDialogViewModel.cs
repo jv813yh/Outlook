@@ -1,8 +1,10 @@
 ﻿using Outlook.Business;
+using Outlook.Modules.Mail.Models;
 using Outlook.Services.Interfaces.MailInterfaces;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
+using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace Outlook.Modules.Mail.ViewModels
@@ -66,6 +68,7 @@ namespace Outlook.Modules.Mail.ViewModels
         public void OnDialogOpened(IDialogParameters parameters)
         {
             var messageId = parameters.GetValue<int?>(MailParameters.MailMessageId);
+            MessageModes messageMode = parameters.GetValue<MessageModes>(MailParameters.MailMessageMode);
 
             // if no id is passed, then we are creating a new message
             if (!messageId.HasValue)
@@ -75,6 +78,38 @@ namespace Outlook.Modules.Mail.ViewModels
                     // default values
                     From = "test123@microsoft.com",
                 };
+
+                if (messageMode == MessageModes.Reply)
+                {
+                    // tbd
+                    // we need to create new one
+                    CurrentMailMessage = new MailMessage()
+                    {
+                        // default values
+                        From = "test123@microsoft.com",
+                    };
+
+                    // we need the original message
+                    var originalMessage = _mailService.GetMessageById(messageId.Value);
+
+                    // set the to field
+                    var toEmails = new ObservableCollection<string>();
+                    toEmails.Add(originalMessage.From);
+                    CurrentMailMessage.To = toEmails;
+
+                    // append RE to the subject
+                    CurrentMailMessage.Subject = "RE: " + originalMessage.Subject;
+
+                    // create a separator -- add the original message info
+                    CurrentMailMessage.Body = "----------------------------------------\n" +
+                        "From: " + originalMessage.From + "\n" +
+                        "To: " + string.Join(", ", originalMessage.To) + "\n" +
+                        "CC: " + string.Join(", ", originalMessage.CC) + "\n" +
+                        "Subject: " + originalMessage.Subject + "\n" +
+                        "Date: " + originalMessage.DataSent.ToString("dd/MM/yyyy") + "\n" +
+                        "----------------------------------------\n\n" +
+                        originalMessage.Body;
+                }
             }
             else
             {
