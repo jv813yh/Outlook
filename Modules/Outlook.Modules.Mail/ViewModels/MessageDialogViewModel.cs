@@ -67,54 +67,13 @@ namespace Outlook.Modules.Mail.ViewModels
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
+            string defaultTestEmail = "test123@microsoft.com";
+
             var messageId = parameters.GetValue<int?>(MailParameters.MailMessageId);
             MessageModes messageMode = parameters.GetValue<MessageModes>(MailParameters.MailMessageMode);
 
-            // if no id is passed, then we are creating a new message
-            if (!messageId.HasValue)
-            {
-                CurrentMailMessage = new MailMessage() 
-                {
-                    // default values
-                    From = "test123@microsoft.com",
-                };
-
-                if (messageMode == MessageModes.Reply)
-                {
-                    // tbd
-                    // we need to create new one
-                    CurrentMailMessage = new MailMessage()
-                    {
-                        // default values
-                        From = "test123@microsoft.com",
-                    };
-
-                    // we need the original message
-                    var originalMessage = _mailService.GetMessageById(messageId.Value);
-
-                    // set the to field
-                    var toEmails = new ObservableCollection<string>();
-                    toEmails.Add(originalMessage.From);
-                    CurrentMailMessage.To = toEmails;
-
-                    // append RE to the subject
-                    CurrentMailMessage.Subject = "RE: " + originalMessage.Subject;
-
-                    // create a separator -- add the original message info
-                    CurrentMailMessage.Body = "----------------------------------------\n" +
-                        "From: " + originalMessage.From + "\n" +
-                        "To: " + string.Join(", ", originalMessage.To) + "\n" +
-                        "CC: " + string.Join(", ", originalMessage.CC) + "\n" +
-                        "Subject: " + originalMessage.Subject + "\n" +
-                        "Date: " + originalMessage.DataSent.ToString("dd/MM/yyyy") + "\n" +
-                        "----------------------------------------\n\n" +
-                        originalMessage.Body;
-                }
-            }
-            else
-            {
-                CurrentMailMessage = _mailService.GetMessageById(messageId.Value);
-            }
+            // 
+            ExecuteShowingDialog(messageId, messageMode);
         }
 
 
@@ -124,5 +83,70 @@ namespace Outlook.Modules.Mail.ViewModels
         }
 
         public event Action<IDialogResult>? RequestClose;
+
+
+        void ExecuteShowingDialog(int? messageId, MessageModes messageModes)
+        {
+
+            switch (messageModes)
+            {
+                case MessageModes.New:
+                    InitializeDefaultValues();
+
+                    break;
+                case MessageModes.Reply:
+                    PrepareMailMessageForReply(messageId);
+
+                    break;
+                case MessageModes.ReplyAll:
+                    //var toEmails = new ObservableCollection<string>(originalEmail.To);
+                    //toEmails.Add(originalEmail.From);
+                    //toEmails.AddRange(originalMessage.Cc);
+
+                    break;
+                case MessageModes.Forward:
+                    break;
+                case MessageModes.ReadOnly:
+                    break;
+            }
+        }
+
+        void InitializeDefaultValues()
+        {
+            // Default values
+            string defaultTestEmail = "test123@microsoft.com";
+
+            CurrentMailMessage = new MailMessage()
+            {
+                // default values
+                From = defaultTestEmail,
+            };
+
+        }
+
+        void PrepareMailMessageForReply(int? messageId)
+        {
+            if (CurrentMailMessage == null)
+            {
+                InitializeDefaultValues();
+            }
+
+            if(messageId.HasValue)
+            {
+                // we need the original message
+                var originalMessage = _mailService.GetMessageById(messageId.Value);
+
+                // set the to field
+                var toEmails = new ObservableCollection<string>();
+                toEmails.Add(originalMessage.From);
+                CurrentMailMessage.To = toEmails;
+
+                // append RE to the subject
+                CurrentMailMessage.Subject = "RE: " + originalMessage.Subject;
+
+                // TBD
+                CurrentMailMessage.Body = originalMessage.Body;
+            }
+        }
     }
 }

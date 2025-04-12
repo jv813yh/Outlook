@@ -51,37 +51,58 @@ namespace Outlook.Modules.Mail.ViewModels
         public DelegateCommand<string> SelectMessageCommand =>
             _selectMessageCommand ?? (_selectMessageCommand = new DelegateCommand<string>(ExecuteSelectMessageCommand));
 
-        private void ExecuteSelectMessageCommand(string obj)
+        private void ExecuteSelectMessageCommand(string parameter)
         {
             if(SelectedMailMessage == null)
                 return;
 
             //  Default values
             string viewName = "MessageDialogView";
-            DialogParameters parameters = new DialogParameters();
-            parameters.Add(MailParameters.MailMessageId, SelectedMailMessage.Id);
-
-            // Set default message mode
+            int? mailMessageId = null;
             MessageModes messageModes = MessageModes.New;
 
-            if (obj == "Read")
-                viewName = "MessageReadOnlyView";
-            else if (obj == "Reply")
-                messageModes = MessageModes.Reply;
+            // set the values according to the parameter
+            SetValues(parameter, ref viewName, ref messageModes, ref mailMessageId);
 
+
+            // Create parameters for the dialog
+            DialogParameters parameters = new DialogParameters();
+            parameters.Add(MailParameters.MailMessageId, mailMessageId);
+            // add parameters to the dialog
             parameters.Add(MailParameters.MailMessageMode, messageModes);
 
             // show dialog
-            _dialogService.ShowRegionDialog(RegionNames.ContentRegion,
-                    viewName,
-                    parameters,
-                    dialogResult =>
-                    {
-                        if (dialogResult.Result == ButtonResult.OK)
-                        {
-                            // do something
-                        }
-                    });
+            OpenDialogWindow(viewName, parameters);
+        }
+
+        private void OpenDialogWindow(string viewName, DialogParameters parameters)
+        {
+            var messageId = parameters.GetValue<int?>(MailParameters.MailMessageId);
+
+            if (messageId.HasValue)
+            {
+                _dialogService.ShowRegionDialog(RegionNames.ContentRegion,
+                     viewName,
+                     parameters,
+                     dialogResult =>
+                     {
+                         if (dialogResult.Result == ButtonResult.OK)
+                         {
+                             // do something
+                         }
+                     });
+            }
+            else
+            {
+                _dialogService.ShowRegionDialog(RegionNames.ContentRegion,
+                   viewName,
+                   parameters,
+                   dialogResult =>
+                   {
+                       SetCorretMessageFromDialog(dialogResult);
+                   });
+
+            }
         }
 
         /// <summary>
@@ -104,32 +125,12 @@ namespace Outlook.Modules.Mail.ViewModels
         {
         }
 
-        private DelegateCommand _newMessageCommand;
-        public DelegateCommand NewMessageCommand =>
-            _newMessageCommand ?? (_newMessageCommand = new DelegateCommand(ExecuteNewMessageCommand));
-
-
         private DelegateCommand _replyMessageCommand;
         public DelegateCommand ReplyMessageCommand =>
             _replyMessageCommand ?? (_replyMessageCommand = new DelegateCommand(ExecuteReplyMessageCommand));
 
         private void ExecuteReplyMessageCommand()
         {
-        }
-
-        private void ExecuteNewMessageCommand()
-        {
-            var parameters = new DialogParameters();
-            parameters.Add(FolderParameters.MailMessageKey, null);
-
-            // show dialog 
-            _dialogService.ShowRegionDialog(RegionNames.ContentRegion,
-                nameof(MessageDialogView),
-                parameters,
-                dialogResult =>
-                {
-                    SetCorretMessageFromDialog(dialogResult);
-                });
         }
 
         /// <summary>
@@ -211,6 +212,44 @@ namespace Outlook.Modules.Mail.ViewModels
             {
                 // add to sent folder
                 MailMessages.Add(message);
+            }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="parameter"></param>
+        /// <param name="viewName"></param>
+        /// <param name="messageModes"></param>
+        void SetValues(string parameter,
+             ref string viewName,
+             ref MessageModes messageModes,
+             ref int? mailMessageId)
+        {
+            mailMessageId = SelectedMailMessage.Id;
+
+            if (parameter == nameof(MessageModes.ReadOnly))
+            {
+                viewName = "MessageReadOnlyView";
+                messageModes = MessageModes.ReadOnly;
+            }
+            else if (parameter == nameof(MessageModes.Reply))
+            {
+                messageModes = MessageModes.Reply;
+            }
+            else if (parameter == nameof(MessageModes.ReplyAll))
+            {
+                messageModes = MessageModes.ReplyAll;
+            }
+            else if (parameter == nameof(MessageModes.Forward))
+            {
+                messageModes = MessageModes.Forward;
+            }
+            else if (parameter == nameof(MessageModes.New))
+            {
+                messageModes = MessageModes.New;
+                mailMessageId = null;
             }
         }
     }

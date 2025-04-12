@@ -6,5 +6,6 @@
         Reply,
         ReplyAll,
         Forward,
+        ReadOnly
     }
 }

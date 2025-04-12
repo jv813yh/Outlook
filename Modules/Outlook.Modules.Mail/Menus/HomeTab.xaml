@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:ig="http://schemas.infragistics.com/xaml/wpf"
+             xmlns:messageModes="clr-namespace:Outlook.Modules.Mail.Models"
              Header="Mail">
 
     <!-- The RibbonGroup is a container for Ribbon controls with name New -->
@@ -16,7 +17,8 @@
                  with text Button and shows image and text together -->
             <ig:ButtonTool Caption="New"
                            SmallImage="../Resources/Images/new_email.png"
-                           Command="{Binding NewMessageCommand}"
+                           Command="{Binding SelectMessageCommand}"
+                           CommandParameter="New"
                            ig:RibbonGroup.MaximumSize="ImageAndTextLarge"/>
 
         </ig:ToolHorizontalWrapPanel>
@@ -48,11 +50,13 @@
             <ig:ButtonTool Caption="ReplyAll"
                             SmallImage="../Resources/Images/replyall_email.png"
                      Command="{Binding ReplyAllMessageCommand}"
+                           CommandParameter="ReplyAll"
                      ig:RibbonGroup.MaximumSize="ImageAndTextLarge"/>
 
             <ig:ButtonTool Caption="Forward"
                             SmallImage="../Resources/Images/forward_email.png"
                            Command="{Binding ForwardMessageCommand}"
+                           CommandParameter="Forward"
                            ig:RibbonGroup.MaximumSize="ImageAndTextLarge"/>
 
         </ig:ToolHorizontalWrapPanel>

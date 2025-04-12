@@ -35,6 +35,10 @@ namespace Outlook.Modules.Mail.ViewModels
         {
         }
 
+        /// <summary>
+        /// Get data from the dialog during intialization
+        /// </summary>
+        /// <param name="parameters"></param>
         public void OnDialogOpened(IDialogParameters parameters)
         {
             var messageId = parameters.GetValue<int?>(MailParameters.MailMessageId);
