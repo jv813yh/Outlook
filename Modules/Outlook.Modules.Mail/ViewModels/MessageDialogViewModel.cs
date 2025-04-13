@@ -50,7 +50,7 @@ namespace Outlook.Modules.Mail.ViewModels
             IDialogParameters dialogParameters = new DialogParameters();
             dialogParameters.Add(FolderParameters.MessageSent, CurrentMailMessage);
 
-            MessageBox.Show("Message was sent sucessfully", "Information", 
+            MessageBox.Show("Message was sent sucessfully", "Information",
                 MessageBoxButton.OK, MessageBoxImage.Information);
 
             // Invoke the RequestClose event to close the dialog with the parameters
@@ -60,7 +60,7 @@ namespace Outlook.Modules.Mail.ViewModels
 
         public bool CanCloseDialog()
          => true;
-        
+
         public void OnDialogClosed()
         {
         }
@@ -92,20 +92,20 @@ namespace Outlook.Modules.Mail.ViewModels
             {
                 case MessageModes.New:
                     InitializeDefaultValues();
-
                     break;
+
                 case MessageModes.Reply:
-                    PrepareMailMessageForReply(messageId);
-
+                    PrepareMailMessageForReplyOrForward(messageId, "RE: ");
                     break;
+
                 case MessageModes.ReplyAll:
-                    //var toEmails = new ObservableCollection<string>(originalEmail.To);
-                    //toEmails.Add(originalEmail.From);
-                    //toEmails.AddRange(originalMessage.Cc);
+                    PrepareMailMessageForReplyAll(messageId, "RE: ");
+                    break;
 
-                    break;
                 case MessageModes.Forward:
+                    PrepareMailMessageForReplyOrForward(messageId, "FWD: ");
                     break;
+
                 case MessageModes.ReadOnly:
                     break;
             }
@@ -124,27 +124,58 @@ namespace Outlook.Modules.Mail.ViewModels
 
         }
 
-        void PrepareMailMessageForReply(int? messageId)
+        void PrepareMailMessageForReplyOrForward(int? messageId, string messageSubject)
         {
-            if (CurrentMailMessage == null)
-            {
-                InitializeDefaultValues();
-            }
-
-            if(messageId.HasValue)
+            if (messageId.HasValue)
             {
                 // we need the original message
                 var originalMessage = _mailService.GetMessageById(messageId.Value);
 
                 // set the to field
                 var toEmails = new ObservableCollection<string>();
+
+                //
+                PrepareMailMessageBase(originalMessage, toEmails, messageSubject);
+            }
+        }
+
+        void PrepareMailMessageForReplyAll(int? messageId, string messageSubject)
+        {
+            if (messageId.HasValue)
+            {
+                // we need the original message
+                var originalMessage = _mailService.GetMessageById(messageId.Value);
+
+                // set the to field
+                var toEmails = new ObservableCollection<string>();
+
+                //
+                PrepareMailMessageBase(originalMessage, toEmails, messageSubject);
+                if (originalMessage.CC != null)
+                {
+                    toEmails.AddRange(originalMessage.CC);
+                }
+            }
+        }
+
+        void PrepareMailMessageBase(MailMessage? originalMessage,
+                                        ObservableCollection<string> toEmails,
+                                        string messageSubject)
+        {
+            if (CurrentMailMessage == null)
+            {
+                InitializeDefaultValues();
+            }
+
+            if (originalMessage != null)
+            {
+                // set the to field
                 toEmails.Add(originalMessage.From);
-                CurrentMailMessage.To = toEmails;
 
                 // append RE to the subject
-                CurrentMailMessage.Subject = "RE: " + originalMessage.Subject;
+                CurrentMailMessage.Subject = messageSubject + originalMessage.Subject;
 
-                // TBD
+                // TBD, append RTF with reply header
                 CurrentMailMessage.Body = originalMessage.Body;
             }
         }
